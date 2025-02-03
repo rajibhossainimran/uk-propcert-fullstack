@@ -1,0 +1,16 @@
+/* Add this CSS to your styles */
+
+/* Basic transition on images */
+.carousel-image {
+  transition: transform 1s ease-in-out;
+}
+
+/* Zoom-in when the image is active */
+.carousel-image.zoom-in {
+  transform: scale(1.1);
+}
+
+/* Default size of the image (zoomed-out) */
+.carousel-image.zoom-out {
+  transform: scale(1);
+}
