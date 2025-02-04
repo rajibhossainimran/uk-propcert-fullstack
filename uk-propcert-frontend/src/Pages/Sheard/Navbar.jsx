@@ -18,11 +18,11 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 text-lime-700 font-medium">
           <ul className='list-none flex gap-8'>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Services</a></li>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">FAQs</a></li>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Blog</a></li>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">About Us</a></li>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Contact Us</a></li>
+            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Services</a></li>
+            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">FAQs</a></li>
+            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Blog</a></li>
+            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">About Us</a></li>
+            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Contact Us</a></li>
           </ul>
         </div>
 
@@ -37,7 +37,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden text-green-600 text-2xl" onClick={() => setIsOpen(!isOpen)}>
+        <button className="md:hidden text-lime-800 text-2xl" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <FiX /> : <FiMenu />}
         </button>
       </div>
@@ -45,15 +45,15 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden bg-white shadow-lg p-4 space-y-4">
-          <a href="#" className="block text-green-600">Services</a>
-          <a href="#" className="block text-green-600">FAQs</a>
-          <a href="#" className="block text-green-600">Blog</a>
-          <a href="#" className="block text-green-600">About Us</a>
-          <a href="#" className="block text-green-600">Contact Us</a>
-          <button className="w-full border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-100">
+          <a href="#" className="block text-lime-800">Services</a>
+          <a href="#" className="block text-lime-800">FAQs</a>
+          <a href="#" className="block text-lime-800">Blog</a>
+          <a href="#" className="block text-lime-800">About Us</a>
+          <a href="#" className="block text-lime-800">Contact Us</a>
+          <button className="w-full border border-lime-600 text-lime-800 px-4 py-2 rounded-full hover:bg-green-100">
             Track order
           </button>
-          <button className="w-full bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700">
+          <button className="w-full bg-lime-600 text-white px-4 py-2 rounded-full hover:bg-lime-700">
             Get a quote
           </button>
         </div>

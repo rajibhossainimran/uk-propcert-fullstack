@@ -6,6 +6,10 @@ import 'swiper/css/navigation';
 import Popularplace from '../../Component/Popularplace';
 import Features from '../../Component/Features';
 import MostPopular from '../../Component/MostPopular';
+import ServiceTabs from '../../Component/ServiceTabs';
+import StatsSection from '../../Component/StatsSection';
+import HowItWorks from '../../Component/HowItWorks';
+import FeaturedBlog from '../../Component/FeaturedBlog';
 
 const Home = () => {
     return (
@@ -115,7 +119,19 @@ const Home = () => {
                 <MostPopular></MostPopular>
             </div>
             <div>
+                <ServiceTabs></ServiceTabs>
+            </div>
+            <div>
+                <HowItWorks></HowItWorks>
+            </div>
+            <div>
+                <StatsSection></StatsSection>
+            </div>
+            <div>
                 <Popularplace></Popularplace>
+            </div>
+            <div>
+                <FeaturedBlog></FeaturedBlog>
             </div>
         </div>
     );
