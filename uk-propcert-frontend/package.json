@@ -1,5 +1,5 @@
 {
-  "name": "real-estate-frontend",
+  "name": "uk-propcert-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -19,9 +19,10 @@
     "radix-ui": "^1.1.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.5",
-    "real-estate-frontend": "file:",
-    "swiper": "^11.2.2"
+    "swiper": "^11.2.2",
+    "uk-propcert-frontend": "file:"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
