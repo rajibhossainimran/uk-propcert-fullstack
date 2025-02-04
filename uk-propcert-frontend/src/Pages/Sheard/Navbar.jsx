@@ -12,26 +12,26 @@ const Navbar = () => {
         {/* Logo */}
         <div className="flex items-center space-x-2">
           {/* <img src="/logo.png" alt="Logo" className="h-8 w-8" /> */}
-          <Link to="/"><span className="text-green-600 font-bold text-xl">UK PROPCERT</span></Link>
+          <Link to="/"><span className="text-lime-700 font-bold text-xl">UK PROPCERT</span></Link>
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex space-x-6 text-green-600 font-medium">
+        <div className="hidden md:flex space-x-6 text-lime-700 font-medium">
           <ul className='list-none flex gap-8'>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-pink-50 rounded-3xl py-1 px-3 block">Services</a></li>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-pink-50 rounded-3xl py-1 px-3 block">FAQs</a></li>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-pink-50 rounded-3xl py-1 px-3 block">Blog</a></li>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-pink-50 rounded-3xl py-1 px-3 block">About Us</a></li>
-            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-pink-50 rounded-3xl py-1 px-3 block">Contact Us</a></li>
+            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Services</a></li>
+            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">FAQs</a></li>
+            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Blog</a></li>
+            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">About Us</a></li>
+            <li><a href="#" className="hover:text-green-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Contact Us</a></li>
           </ul>
         </div>
 
         {/* Buttons */}
         <div className="hidden md:flex space-x-4">
-          <button className="border border-green-600 text-green-600 px-4 py-2 rounded-full hover:bg-green-100">
+          <button className="border border-lime-600 text-lime-700 px-4 py-2 rounded-full hover:bg-lime-100">
             Track order
           </button>
-          <button className="bg-green-600 text-white px-4 py-2 rounded-full hover:bg-green-700">
+          <button className="bg-lime-600 text-white px-4 py-2 rounded-full hover:bg-lime-500">
             Get a quote
           </button>
         </div>

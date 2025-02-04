@@ -5,6 +5,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import Popularplace from '../../Component/Popularplace';
 import Features from '../../Component/Features';
+import MostPopular from '../../Component/MostPopular';
 
 const Home = () => {
     return (
@@ -109,6 +110,9 @@ const Home = () => {
             </Swiper>
             <div>
                 <Features></Features>
+            </div>
+            <div>
+                <MostPopular></MostPopular>
             </div>
             <div>
                 <Popularplace></Popularplace>
