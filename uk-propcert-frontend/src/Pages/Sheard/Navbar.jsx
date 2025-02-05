@@ -19,10 +19,10 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-6 text-lime-700 font-medium">
           <ul className='list-none flex gap-8'>
             <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Services</a></li>
-            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">FAQs</a></li>
-            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Blog</a></li>
-            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">About Us</a></li>
-            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Contact Us</a></li>
+            <li><Link to="/faqs" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">FAQs</Link></li>
+            <li><Link to="/blogs" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Blog</Link></li>
+            <li><Link to="/about" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">About Us</Link></li>
+            <li><Link to="/contact" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Contact Us</Link></li>
           </ul>
         </div>
 

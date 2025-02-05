@@ -51,7 +51,7 @@ export default function ServiceTabs() {
         Select Your Services
       </h2>
       {/* Tabs */}
-      <div className="flex ">
+      <div className="flex md:flex-row flex-col ">
         {tabs.map((tab) => (
           <button
             key={tab.id}

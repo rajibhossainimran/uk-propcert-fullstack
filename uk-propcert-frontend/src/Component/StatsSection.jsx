@@ -26,7 +26,7 @@ const StatsSection = () => {
 
   return (
     <div
-      className="mt-20 relative bg-cover bg-center py-12 px-6 lg:px-16 flex flex-col lg:flex-row items-center h-[600px]"
+      className="mt-20 relative bg-cover bg-center py-12 px-6 lg:px-16 flex flex-col lg:flex-row items-center h-full"
       style={{
         backgroundImage:
           "url('https://energyperformancecertificates.co.uk/assets/front/image/eicr-london1/section_image.png?v=15.0.500')",
