@@ -1,0 +1,173 @@
+[
+    {
+      "id": 1,
+      "service_name": "EICR Electrical Inspection",
+      "description": "Electrical Installation Condition Report (EICR) for residential properties.",
+      "price": 120,
+      "icon": "⚡",
+      "category": "Electrical Safety",
+      "status": "Pending",
+      "certificate_url": null,
+      "report_url": "https://example.com/reports/eicr-001.pdf",
+      "property": {
+        "address": "123 Baker Street, London, UK",
+        "type": "Apartment",
+        "owner": "John Doe",
+        "contact": "+44 1234 567890"
+      }
+    },
+    {
+      "id": 2,
+      "service_name": "Gas Safety Check",
+      "description": "Complete gas safety inspection and certification for landlords.",
+      "price": 90,
+      "icon": "🔥",
+      "category": "Gas Safety",
+      "status": "Completed",
+      "certificate_url": "https://example.com/certificates/gas-001.pdf",
+      "report_url": "https://example.com/reports/gas-001.pdf",
+      "property": {
+        "address": "456 Oxford Street, Manchester, UK",
+        "type": "House",
+        "owner": "Jane Smith",
+        "contact": "+44 9876 543210"
+      }
+    },
+    {
+      "id": 3,
+      "service_name": "Fire Risk Assessment",
+      "description": "Detailed fire safety inspection and compliance certification.",
+      "price": 150,
+      "icon": "🔥",
+      "category": "Fire Safety",
+      "status": "In Progress",
+      "certificate_url": null,
+      "report_url": "https://example.com/reports/fire-001.pdf",
+      "property": {
+        "address": "789 King's Road, Birmingham, UK",
+        "type": "Commercial",
+        "owner": "ABC Ltd.",
+        "contact": "+44 1122 334455"
+      }
+    },
+    {
+      "id": 4,
+      "service_name": "Energy Performance Certificate (EPC)",
+      "description": "Energy efficiency rating and performance certificate.",
+      "price": 80,
+      "icon": "💡",
+      "category": "Energy Efficiency",
+      "status": "Completed",
+      "certificate_url": "https://example.com/certificates/epc-001.pdf",
+      "report_url": "https://example.com/reports/epc-001.pdf",
+      "property": {
+        "address": "321 Queen Street, Liverpool, UK",
+        "type": "Flat",
+        "owner": "David Johnson",
+        "contact": "+44 5566 778899"
+      }
+    },
+    {
+      "id": 5,
+      "service_name": "Legionella Risk Assessment",
+      "description": "Water system testing for Legionella bacteria risk assessment.",
+      "price": 110,
+      "icon": "💧",
+      "category": "Water Safety",
+      "status": "Pending",
+      "certificate_url": null,
+      "report_url": "https://example.com/reports/legionella-001.pdf",
+      "property": {
+        "address": "654 City Road, Bristol, UK",
+        "type": "Office",
+        "owner": "Green Tech Ltd.",
+        "contact": "+44 6677 889900"
+      }
+    },
+    {
+      "id": 6,
+      "service_name": "PAT Testing",
+      "description": "Portable Appliance Testing (PAT) for electrical equipment safety.",
+      "price": 60,
+      "icon": "🔌",
+      "category": "Electrical Safety",
+      "status": "Completed",
+      "certificate_url": "https://example.com/certificates/pat-001.pdf",
+      "report_url": "https://example.com/reports/pat-001.pdf",
+      "property": {
+        "address": "222 Tower Bridge, London, UK",
+        "type": "Shop",
+        "owner": "Retail Co.",
+        "contact": "+44 9988 776655"
+      }
+    },
+    {
+      "id": 7,
+      "service_name": "Asbestos Survey",
+      "description": "Inspection and report on asbestos presence in buildings.",
+      "price": 130,
+      "icon": "🏠",
+      "category": "Building Safety",
+      "status": "In Progress",
+      "certificate_url": null,
+      "report_url": "https://example.com/reports/asbestos-001.pdf",
+      "property": {
+        "address": "999 Old Street, Leeds, UK",
+        "type": "Warehouse",
+        "owner": "Storage Solutions Ltd.",
+        "contact": "+44 4433 221177"
+      }
+    },
+    {
+      "id": 8,
+      "service_name": "Smoke Alarm Installation",
+      "description": "Installation and testing of smoke alarms for home safety.",
+      "price": 50,
+      "icon": "🚨",
+      "category": "Fire Safety",
+      "status": "Completed",
+      "certificate_url": "https://example.com/certificates/smoke-001.pdf",
+      "report_url": "https://example.com/reports/smoke-001.pdf",
+      "property": {
+        "address": "777 High Street, Glasgow, UK",
+        "type": "Apartment",
+        "owner": "Emma Watson",
+        "contact": "+44 3322 445566"
+      }
+    },
+    {
+      "id": 9,
+      "service_name": "Boiler Servicing",
+      "description": "Routine maintenance and servicing for home boilers.",
+      "price": 85,
+      "icon": "🔥",
+      "category": "Gas Safety",
+      "status": "Pending",
+      "certificate_url": null,
+      "report_url": "https://example.com/reports/boiler-001.pdf",
+      "property": {
+        "address": "567 Elm Street, Cardiff, UK",
+        "type": "House",
+        "owner": "James Carter",
+        "contact": "+44 2244 556677"
+      }
+    },
+    {
+      "id": 10,
+      "service_name": "Emergency Lighting Inspection",
+      "description": "Testing and certification of emergency lighting systems.",
+      "price": 95,
+      "icon": "💡",
+      "category": "Electrical Safety",
+      "status": "Completed",
+      "certificate_url": "https://example.com/certificates/emergency-lighting-001.pdf",
+      "report_url": "https://example.com/reports/emergency-lighting-001.pdf",
+      "property": {
+        "address": "999 Station Road, Edinburgh, UK",
+        "type": "Hotel",
+        "owner": "Royal Inns Ltd.",
+        "contact": "+44 6677 332211"
+      }
+    }
+  ]
+  

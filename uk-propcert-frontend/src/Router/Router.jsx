@@ -9,6 +9,8 @@ import Service from '../Pages/Service/Service';
 import NewProperty from '../NewProperties/NewProperty';
 import FAQ from '../Pages/FAQ/FAQ';
 import Blogs from '../Pages/Blogs/Blogs';
+import OrderTracking from '../Pages/OrderTracking/OrderTracking';
+import PropertySelector from '../Pages/PropertySelector/PropertySelector';
 
 const Router = createBrowserRouter([
     {
@@ -24,8 +26,8 @@ const Router = createBrowserRouter([
                 element: <FAQ></FAQ>
             },
             {
-                path:'/agents',
-                element: <Agents></Agents>
+                path:'/propertySelector',
+                element: <PropertySelector></PropertySelector>
             },
             {
                 path: '/about',
@@ -36,8 +38,8 @@ const Router = createBrowserRouter([
                 element: <Service></Service>
             },
             {
-                path: '/newproperty',
-                element: <NewProperty></NewProperty>
+                path: '/ordetracking',
+                element: <OrderTracking></OrderTracking>
             },
             {
                 path: '/blogs',

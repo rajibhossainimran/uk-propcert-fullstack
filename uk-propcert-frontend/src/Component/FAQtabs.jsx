@@ -20,7 +20,7 @@ export default function FAQSection() {
   return (
     <div className="w-full mx-auto p-4">
       {/* FAQ Section */}
-      <div className="bg-lime-200 p-4 rounded-lg">
+      <div className=" p-4 rounded-lg">
         {faqs.map((faq, index) => (
           <div key={index} className="border-b border-lime-300">
             <button

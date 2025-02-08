@@ -18,7 +18,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6 text-lime-700 font-medium">
           <ul className='list-none flex gap-8'>
-            <li><a href="#" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Services</a></li>
+            <li><Link to="/service" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Services</Link></li>
             <li><Link to="/faqs" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">FAQs</Link></li>
             <li><Link to="/blogs" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">Blog</Link></li>
             <li><Link to="/about" className="hover:text-lime-800 font-semibold text-xl hover:bg-lime-100 rounded-3xl py-1 px-3 block">About Us</Link></li>
@@ -28,12 +28,16 @@ const Navbar = () => {
 
         {/* Buttons */}
         <div className="hidden md:flex space-x-4">
+          <Link to="/ordetracking">
           <button className="border border-lime-600 text-lime-700 px-4 py-2 rounded-full hover:bg-lime-100">
             Track order
           </button>
+          </Link>
+          <Link to="/propertySelector">
           <button className="bg-lime-600 text-white px-4 py-2 rounded-full hover:bg-lime-500">
             Get a quote
           </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
