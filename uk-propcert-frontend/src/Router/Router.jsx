@@ -11,6 +11,9 @@ import FAQ from '../Pages/FAQ/FAQ';
 import Blogs from '../Pages/Blogs/Blogs';
 import OrderTracking from '../Pages/OrderTracking/OrderTracking';
 import PropertySelector from '../Pages/PropertySelector/PropertySelector';
+import Layoutdashboard from '../Dashboard/DashboardLayout/LayoutDashboard';
+import DashboardHome from '../Dashboard/DashboardPages/DashboardHome/DashboardHome';
+import DashboardProperty from '../Dashboard/DashboardPages/DashboardProperty/DashboardProperty';
 
 const Router = createBrowserRouter([
     {
@@ -48,6 +51,20 @@ const Router = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact></Contact>
+            }
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <Layoutdashboard></Layoutdashboard>,
+        children: [
+            {
+                path: 'dashboardhome',
+                element: <DashboardHome></DashboardHome>
+            },
+            {
+                path: 'dashboardproperty',
+                element: <DashboardProperty></DashboardProperty>
             }
         ]
     }
