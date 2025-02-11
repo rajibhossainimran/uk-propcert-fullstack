@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import Font
 import { faBars, faMoon, faSun, faBell, faCalendarDays,faRightFromBracket, faTicket, faCircleInfo, faUser} from "@fortawesome/free-solid-svg-icons";
 import { faGear, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from 'react-router-dom';
 
 const NavbarDashboard = () => {
   const getInitialTheme = () => {
@@ -46,19 +47,15 @@ const NavbarDashboard = () => {
             <div className='flex justify-between py-4 px-8 shadow-lg items-center'>
                 <div className="">
                     <div className="">
-                        <button id='nav-toggle' className="text-gray-700" >
-                            <FontAwesomeIcon icon={faBars} size='2x'/>
-                        </button>
+                        
                     </div>
                 </div>
                 <div className=''>
-                    <input type="text" placeholder="Search..." className="border outline-none px-3 py-2 w-72 rounded-lg " />
+                    
                 </div>
                 <div className='flex mr-72 gap-8 items-center'>
                     <div>
-                      <button onClick={() => setDarkMode(!darkMode)} className="text-2xl">
-                        {darkMode ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />}
-                      </button>
+                      
                     </div>
                     {/* Notification Button And Popup */}
                     <div>
@@ -239,7 +236,7 @@ const NavbarDashboard = () => {
                           <div className="w-10 rounded-full">
                             <img
                               alt="Tailwind CSS Navbar component"
-                              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                              src="https://png.pngtree.com/png-vector/20230304/ourmid/pngtree-male-avator-icon-vector-png-image_6631112.png" />
                           </div>
                         </div>
                         <ul
@@ -250,7 +247,7 @@ const NavbarDashboard = () => {
                           <li className='font-semibold'><a href=""><FontAwesomeIcon icon={faCircleInfo} /> Help</a></li>
                           <li className='font-semibold'><a href=""><FontAwesomeIcon icon={faUser}/> Update Profile</a></li>
                           <hr />
-                          <li className='font-semibold'><a href=""><FontAwesomeIcon icon={faRightFromBracket}/> Logout</a></li>
+                          <li className='font-semibold'><Link to="/"><FontAwesomeIcon icon={faRightFromBracket}/> Logout</Link></li>
                         </ul>
                       </div>
                     </div>

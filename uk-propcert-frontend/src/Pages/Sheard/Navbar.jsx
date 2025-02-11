@@ -38,6 +38,12 @@ const Navbar = () => {
             Get a quote
           </button>
           </Link>
+
+          <Link to="/login">
+          <button className="bg-lime-600 text-white px-4 py-2 rounded-full hover:bg-lime-500">
+            Login
+          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}

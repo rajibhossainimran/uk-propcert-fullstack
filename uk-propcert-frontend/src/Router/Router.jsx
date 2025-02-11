@@ -14,6 +14,8 @@ import PropertySelector from '../Pages/PropertySelector/PropertySelector';
 import Layoutdashboard from '../Dashboard/DashboardLayout/LayoutDashboard';
 import DashboardHome from '../Dashboard/DashboardPages/DashboardHome/DashboardHome';
 import DashboardProperty from '../Dashboard/DashboardPages/DashboardProperty/DashboardProperty';
+import Login from '../Pages/Login/Login';
+import Register from '../Pages/Register/Register';
 
 const Router = createBrowserRouter([
     {
@@ -51,6 +53,14 @@ const Router = createBrowserRouter([
             {
                 path: '/contact',
                 element: <Contact></Contact>
+            },
+            {
+                path: '/login',
+                element: <Login></Login>
+            },
+            {
+                path: '/register',
+                element: <Register></Register>
             }
         ]
     },
