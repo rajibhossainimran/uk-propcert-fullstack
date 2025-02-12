@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesomeIcon
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; 
 import { faBars, faMoon, faSun, faBell, faCalendarDays,faRightFromBracket, faTicket, faCircleInfo, faUser} from "@fortawesome/free-solid-svg-icons";
 import { faGear, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
