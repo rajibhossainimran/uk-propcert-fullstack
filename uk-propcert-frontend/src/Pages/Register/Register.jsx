@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
+import { ukprop } from "../../Url/config";
+import useValidation from "../../Error/useValidation";
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
@@ -11,50 +15,43 @@ export default function Register() {
     confirmPassword: "",
     role: "customer",
   });
-  const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError("");
+    setErrors({});
 
-    // Basic validation
+    // Basic validation before sending request
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
+      setErrors({ confirmPassword: ["Passwords do not match"] });
       setIsLoading(false);
       return;
     }
 
     try {
-      // Replace with your actual API endpoint
-      const response = await fetch("http://your-api-url/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-          role: formData.role,
-        }),
+      // Correct Axios request without unnecessary headers
+      const response = await axios.post(`${ukprop}/register`, formData);
+
+      toast.success(response.data.message || "Registered successfully!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        // Redirect to login after successful registration
-        navigate("/login");
-      } else {
-        setError(data.message || "Registration failed. Please try again.");
-      }
-    } catch (err) {
-      setError("An error occurred. Please try again later.");
-      console.error("Registration error:", err);
-    } finally {
+      navigate("/login");
+    } catch (error) {
       setIsLoading(false);
+      
+      if (error.response && error.response.status === 422) {
+        setErrors(error.response.data.errors);
+      } else {
+        toast.error("Registration failed. Please try again.", {
+          position: "top-right",
+        });
+      }
     }
   };
 
@@ -74,10 +71,10 @@ export default function Register() {
               type="text"
               placeholder="Enter your full name"
               className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-              required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             />
+            {useValidation(errors, "name")}
           </div>
 
           {/* Email Field */}
@@ -87,10 +84,10 @@ export default function Register() {
               type="email"
               placeholder="Enter your email"
               className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-              required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             />
+            {useValidation(errors, "email")}
           </div>
 
           {/* Role Selection */}
@@ -121,7 +118,6 @@ export default function Register() {
                 type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-                required
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
               />
@@ -133,6 +129,7 @@ export default function Register() {
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
+            {useValidation(errors, "password")}
           </div>
 
           {/* Confirm Password Field */}
@@ -142,14 +139,14 @@ export default function Register() {
               type="password"
               placeholder="Confirm your password"
               className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
-              required
               value={formData.confirmPassword}
               onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
             />
+            {useValidation(errors, "confirmPassword")}
           </div>
 
-          {/* Error Message */}
-          {error && <p className="text-red-500 text-sm">{error}</p>}
+          {/* Error Messages */}
+          {errors.general && <p className="text-red-500 text-sm">{errors.general}</p>}
 
           {/* Terms Checkbox */}
           <div className="flex items-center text-sm">

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ukprop } from "../../Url/config";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -20,7 +22,7 @@ export default function Login() {
 
     try {
       // Replace with your actual API endpoint
-      const response = await fetch("http://your-api-url/login", {
+      const response = await fetch(`${ukprop}/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -35,6 +37,11 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
+        toast.success(data.message || "Login successful!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+        });
         // Store authentication data (adjust according to your backend response)
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("userRole", data.user.role);
@@ -50,6 +57,8 @@ export default function Login() {
           default:
             navigate("/dashboard");
         }
+
+        
       } else {
         setError(data.message || "Login failed. Please check your credentials.");
       }
@@ -72,7 +81,7 @@ export default function Login() {
           <div>
             <label className="block text-gray-700 text-sm font-medium mb-2">Login As</label>
             <div className="flex gap-4">
-              {["customer", "inspector"].map((role) => (
+              {["customer", "inspector","admin"].map((role) => (
                 <label key={role} className="flex items-center">
                   <input
                     type="radio"

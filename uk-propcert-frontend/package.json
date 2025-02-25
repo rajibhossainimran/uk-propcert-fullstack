@@ -16,6 +16,7 @@
     "@material-tailwind/react": "^2.1.10",
     "antd": "^5.23.3",
     "apexcharts": "^4.4.0",
+    "axios": "^1.7.9",
     "flowbite-react": "^0.10.2",
     "lucide-react": "^0.475.0",
     "radix-ui": "^1.1.2",
@@ -24,6 +25,7 @@
     "react-dom": "^18.3.1",
     "react-icons": "^5.4.0",
     "react-router-dom": "^7.1.5",
+    "react-toastify": "^11.0.5",
     "swiper": "^11.2.2",
     "uk-propcert-frontend": "file:"
   },

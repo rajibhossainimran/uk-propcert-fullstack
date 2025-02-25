@@ -2,9 +2,13 @@ import React, { useState } from 'react';
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from 'react-router-dom';
 
+
+
 // import logo from '../../assets/Logo.png';
 
 const Navbar = () => {
+  
+  const user = JSON.parse(localStorage.getItem("user"));
   const [isOpen, setIsOpen] = useState(false);
   return (
     <nav className="bg-white shadow-md fixed z-30 w-full top-0">
@@ -29,21 +33,21 @@ const Navbar = () => {
         {/* Buttons */}
         <div className="hidden md:flex space-x-4">
           <Link to="/ordetracking">
-          <button className="border border-lime-600 text-lime-700 px-4 py-2 rounded-full hover:bg-lime-100">
-            Track order
-          </button>
+            <button className="border border-lime-600 text-lime-700 px-4 py-2 rounded-full hover:bg-lime-100">
+              Track order
+            </button>
           </Link>
           <Link to="/propertySelector">
-          <button className="bg-lime-600 text-white px-4 py-2 rounded-full hover:bg-lime-500">
-            Get a quote
-          </button>
+            <button className="bg-lime-600 text-white px-4 py-2 rounded-full hover:bg-lime-500">
+              Get a quote
+            </button>
           </Link>
 
-          <Link to="/login">
-          <button className="bg-lime-600 text-white px-4 py-2 rounded-full hover:bg-lime-500">
-            Login
-          </button>
-          </Link>
+          <div>
+          <Link to="/login" className="bg-blue-600 px-4 py-2 rounded-md hover:bg-blue-700">
+                Login
+              </Link>
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
