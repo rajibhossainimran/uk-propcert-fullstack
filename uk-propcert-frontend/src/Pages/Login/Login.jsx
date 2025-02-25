@@ -43,7 +43,8 @@ export default function Login() {
           hideProgressBar: false,
         });
         // Store authentication data (adjust according to your backend response)
-        localStorage.setItem("accessToken", data.accessToken);
+        const token = data.access_token || data.token || data.api_token;
+        localStorage.setItem("accessToken", token);
         localStorage.setItem("userRole", data.user.role);
 
         // Redirect based on role
@@ -52,10 +53,10 @@ export default function Login() {
             navigate("/admin/dashboard");
             break;
           case "inspector":
-            navigate("/inspector/dashboard");
+            navigate("/dashboard");
             break;
           default:
-            navigate("/dashboard");
+            navigate("/");
         }
 
         

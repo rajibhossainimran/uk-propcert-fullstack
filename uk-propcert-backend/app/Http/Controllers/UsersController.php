@@ -50,9 +50,14 @@ class UsersController extends Controller
         $user->update(['api_token' => $token]);
 
         return response()->json([
-            'message' => 'User login successfully',
+            'message' => 'Login successful',
             'token' => $token,
-            'user' => $user
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role' => $user->role // Ensure this is included
+            ]
         ], 200);
     }
 

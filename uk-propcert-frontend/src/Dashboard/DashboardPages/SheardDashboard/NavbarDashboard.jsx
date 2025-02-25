@@ -4,7 +4,7 @@ import { faBars, faMoon, faSun, faBell, faCalendarDays, faRightFromBracket, faTi
 import { faGear, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from 'react-router-dom';
-import logout from '../../../hooks/logout';
+
 
 
 
@@ -256,9 +256,9 @@ const NavbarDashboard = () => {
                 <li className='font-semibold'><a href=""><FontAwesomeIcon icon={faUser} /> Update Profile</a></li>
                 <hr />
                 <li className='font-semibold'>
-                  <button onClick={handleLogout}>
+                  <Link to='/logout'>
                     Logout
-                  </button>
+                  </Link>
                 </li>
               </ul>
             </div>

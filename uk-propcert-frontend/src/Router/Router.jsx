@@ -16,6 +16,8 @@ import DashboardHome from '../Dashboard/DashboardPages/DashboardHome/DashboardHo
 import DashboardProperty from '../Dashboard/DashboardPages/DashboardProperty/DashboardProperty';
 import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
+import Logout from '../hooks/Logout';
+import CustomerDashboard from '../customer/CustomerDashboard';
 
 const Router = createBrowserRouter([
     {
@@ -61,7 +63,13 @@ const Router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/logout',
+                element: <Logout></Logout>
             }
+            
+            
         ]
     },
     {
@@ -77,6 +85,10 @@ const Router = createBrowserRouter([
                 element: <DashboardProperty></DashboardProperty>
             }
         ]
+    },
+    {
+        path: '/mydashboard',
+        element: <CustomerDashboard></CustomerDashboard>
     }
 ])
 
