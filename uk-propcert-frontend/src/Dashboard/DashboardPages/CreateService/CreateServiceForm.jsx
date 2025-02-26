@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ukprop } from "../../../Url/config";
+import { toast } from "react-toastify";  // Import toastify
+import 'react-toastify/dist/ReactToastify.css';  // Import CSS for toastify
 
 const CreateServiceForm = ({ onServiceCreated }) => {
   const [categories, setCategories] = useState([]);
@@ -30,13 +32,21 @@ const CreateServiceForm = ({ onServiceCreated }) => {
         price,
       });
 
-      onServiceCreated(response.data);  // নতুন সার্ভিস লিস্টে দেখানোর জন্য
+      // Display success toast message
+      toast.success("Service created successfully!");
+      
+      // Clear form fields
       setCategoryId("");
       setName("");
       setDescription("");
       setPrice("");
+
+      // Optionally, call onServiceCreated to refresh the list if necessary
+      // onServiceCreated(response.data);
+
     } catch (err) {
       setError("Error creating service. Try again.");
+      toast.error("Failed to create service. Please try again.");  // Display error toast message
     } finally {
       setLoading(false);
     }
@@ -44,64 +54,63 @@ const CreateServiceForm = ({ onServiceCreated }) => {
 
   return (
     <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md mt-20">
-  <h2 className="text-2xl font-semibold text-gray-800 mb-4">Create Service</h2>
-  {error && <p className="text-red-500 mb-2">{error}</p>}
-  <form onSubmit={handleSubmit} className="space-y-4">
-    <select
-      value={categoryId}
-      onChange={(e) => setCategoryId(e.target.value)}
-      required
-      className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-    >
-      <option value="">Select Category</option>
-      {categories.map((category) => (
-        <option key={category.id} value={category.id}>
-          {category.name}
-        </option>
-      ))}
-    </select>
+      <h2 className="text-2xl font-semibold text-gray-800 mb-4">Create Service</h2>
+      {error && <p className="text-red-500 mb-2">{error}</p>}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <select
+          value={categoryId}
+          onChange={(e) => setCategoryId(e.target.value)}
+          required
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option value="">Select Category</option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
 
-    <input
-      type="text"
-      placeholder="Service Name"
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-      required
-      className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
+        <input
+          type="text"
+          placeholder="Service Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-    <textarea
-      placeholder="Service Description"
-      value={description}
-      onChange={(e) => setDescription(e.target.value)}
-      required
-      rows="3"
-      className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-    ></textarea>
+        <textarea
+          placeholder="Service Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+          rows="3"
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        ></textarea>
 
-    <input
-      type="number"
-      placeholder="Price"
-      value={price}
-      onChange={(e) => setPrice(e.target.value)}
-      required
-      className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-    />
+        <input
+          type="number"
+          placeholder="Price"
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          required
+          className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
 
-    <button
-      type="submit"
-      disabled={loading}
-      className={`w-full px-4 py-2 text-white font-semibold rounded-md transition ${
-        loading
-          ? "bg-gray-400 cursor-not-allowed"
-          : "bg-blue-500 hover:bg-blue-600"
-      }`}
-    >
-      {loading ? "Creating..." : "Create Service"}
-    </button>
-  </form>
-</div>
-
+        <button
+          type="submit"
+          disabled={loading}
+          className={`w-full px-4 py-2 text-white font-semibold rounded-md transition ${
+            loading
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-lime-700 hover:bg-lime-600"
+          }`}
+        >
+          {loading ? "Creating..." : "Create Service"}
+        </button>
+      </form>
+    </div>
   );
 };
 

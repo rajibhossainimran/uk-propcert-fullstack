@@ -36,16 +36,19 @@ const ServiceCategory = ({ categoryId }) => {
   }, [categoryId]);
 
   return (
-    <ul>
-      {services.map(service => (
-        <div key={service.id}>
-        <p>{service.name}</p>
-        <p className="w-1/3">{service.description}</p>
-        <p>{service.price}</p>
-        </div>
-        
-      ))}
-    </ul>
+    <ul className="space-y-4 p-4">
+  {services.map((service) => (
+    <li
+      key={service.id}
+      className="bg-white shadow-md rounded-lg p-4 border border-gray-200 hover:shadow-lg transition"
+    >
+      <h2 className="text-xl font-semibold text-gray-800">{service.name}</h2>
+      <p className="text-gray-600 mt-2">{service.description}</p>
+      <p className="text-green-600 font-medium mt-3">Price: ${service.price}</p>
+    </li>
+  ))}
+</ul>
+
   );
 };
 

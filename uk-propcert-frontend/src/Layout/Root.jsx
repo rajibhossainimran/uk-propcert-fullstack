@@ -5,11 +5,20 @@ import Footer from '../Pages/Sheard/Footer';
 
 const Root = () => {
     return (
-        <div>
-            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <Footer></Footer>
+        <div className="min-h-screen flex flex-col">
+        <div className="sticky top-0 z-50">
+            <Navbar />
         </div>
+
+        <main className="flex-grow">
+            <Outlet />
+        </main>
+
+        <div className="mt-auto">
+            <Footer />
+        </div>
+    </div>
+
     );
 };
 
