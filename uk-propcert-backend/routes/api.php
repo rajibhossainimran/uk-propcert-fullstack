@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ServiceCategoryController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,3 +16,14 @@ Route::middleware('auth:sanctum')->group(function () {
         return response()->json($request->user());
     });
 });
+
+
+// category route 
+
+Route::get('/categories', [ServiceCategoryController::class, 'index']);
+Route::post('/categories', [ServiceCategoryController::class, 'store']);
+Route::delete('/categories/{id}', [ServiceCategoryController::class, 'destroy']);
+
+// service route 
+Route::get('/services', [ServiceController::class, 'index']);
+Route::post('/services', [ServiceController::class, 'store']);

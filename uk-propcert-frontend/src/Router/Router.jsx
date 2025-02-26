@@ -18,6 +18,9 @@ import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import Logout from '../hooks/Logout';
 import CustomerDashboard from '../customer/CustomerDashboard';
+import ServiceList from '../Pages/ServiceList';
+import Category from '../Dashboard/DashboardPages/Category/Category';
+import CreateServiceForm from '../Dashboard/DashboardPages/CreateService/CreateServiceForm';
 
 const Router = createBrowserRouter([
     {
@@ -68,6 +71,11 @@ const Router = createBrowserRouter([
                 path: '/logout',
                 element: <Logout></Logout>
             }
+            ,
+            {
+                path: '/services',
+                element: <ServiceList></ServiceList>
+            }
             
             
         ]
@@ -83,6 +91,16 @@ const Router = createBrowserRouter([
             {
                 path: 'dashboardproperty',
                 element: <DashboardProperty></DashboardProperty>
+            }
+            ,
+            {
+                path: 'categories',
+                element: <Category></Category>
+            }
+            ,
+            {
+                path: 'manage-service',
+                element: <CreateServiceForm></CreateServiceForm>
             }
         ]
     },
