@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ServiceCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule; // Add this import
 
 class ServiceCategoryController extends Controller
 {
@@ -19,6 +20,22 @@ class ServiceCategoryController extends Controller
         $request->validate(['name' => 'required|unique:service_categories']);
         $category = ServiceCategory::create($request->all());
         return response()->json($category, 201);
+    }
+
+    // Update a category
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('service_categories')->ignore($id)
+            ]
+        ]);
+
+        $category = ServiceCategory::findOrFail($id);
+        $category->update($request->all());
+        
+        return response()->json($category);
     }
 
     // Delete a category

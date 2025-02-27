@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/categories', [ServiceCategoryController::class, 'index']);
 Route::post('/categories', [ServiceCategoryController::class, 'store']);
 Route::delete('/categories/{id}', [ServiceCategoryController::class, 'destroy']);
-
+Route::put('/categories/{id}', [ServiceCategoryController::class, 'update']);
 // service route 
 Route::get('/services', [ServiceController::class, 'index']);
 Route::post('/services', [ServiceController::class, 'store']);
