@@ -27,3 +27,5 @@ Route::put('/categories/{id}', [ServiceCategoryController::class, 'update']);
 // service route 
 Route::get('/services', [ServiceController::class, 'index']);
 Route::post('/services', [ServiceController::class, 'store']);
+Route::put('services/{id}', [ServiceController::class, 'update']);
+Route::delete('services/{id}', [ServiceController::class, 'destroy']);

@@ -3,6 +3,8 @@ import axios from "axios";
 import { ukprop } from "../../../Url/config";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { BiSolidEdit } from "react-icons/bi";
+import { TiDelete } from "react-icons/ti";
 
 const Category = ({ onCategoryCreated }) => {
   const [name, setName] = useState("");
@@ -127,7 +129,7 @@ const Category = ({ onCategoryCreated }) => {
                   className={`flex-1 px-4 py-2 text-white font-semibold rounded-md transition ${
                     loading
                       ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-blue-600 hover:bg-blue-700"
+                      : "bg-lime-700 hover:bg-lime-600"
                   }`}
                 >
                   {loading ? "Updating..." : "Update"}
@@ -155,18 +157,18 @@ const Category = ({ onCategoryCreated }) => {
               className="flex justify-between items-center p-3 border rounded-md hover:bg-gray-50"
             >
               <span>{category.name}</span>
-              <div className="space-x-2">
+              <div className="space-x-4">
                 <button
                   onClick={() => openEditForm(category)}
                   className="text-blue-600 hover:text-blue-800"
                 >
-                  Edit
+                  <BiSolidEdit className="text-2xl"/>
                 </button>
                 <button
                   onClick={() => handleDelete(category.id)}
                   className="text-red-600 hover:text-red-800"
                 >
-                  Delete
+                  <TiDelete  className="text-2xl "/>
                 </button>
               </div>
             </div>
