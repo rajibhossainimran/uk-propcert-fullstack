@@ -22,6 +22,7 @@ import ServiceList from '../Pages/ServiceList';
 import Category from '../Dashboard/DashboardPages/Category/Category';
 import CreateServiceForm from '../Dashboard/DashboardPages/CreateService/CreateServiceForm';
 
+
 const Router = createBrowserRouter([
     {
         path: '/',
@@ -76,6 +77,7 @@ const Router = createBrowserRouter([
                 path: '/services',
                 element: <ServiceList></ServiceList>
             }
+            
             
             
         ]
