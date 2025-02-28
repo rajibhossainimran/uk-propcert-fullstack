@@ -82,7 +82,7 @@ const Category = ({ onCategoryCreated }) => {
   };
 
   return (
-    <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-20 max-w-2xl">
+    <div className="mx-auto bg-white p-6 rounded-lg shadow-md mt-20 max-w-4xl ">
       {/* Create Category Form */}
       <h2 className="text-xl font-semibold mb-4">Create Category</h2>
       {error && <p className="text-red-500 mb-2">{error}</p>}

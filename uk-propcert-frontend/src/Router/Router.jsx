@@ -21,6 +21,7 @@ import CustomerDashboard from '../customer/CustomerDashboard';
 import ServiceList from '../Pages/ServiceList';
 import Category from '../Dashboard/DashboardPages/Category/Category';
 import CreateServiceForm from '../Dashboard/DashboardPages/CreateService/CreateServiceForm';
+import BookingForm from '../Component/BookingForm';
 
 
 const Router = createBrowserRouter([
@@ -76,6 +77,11 @@ const Router = createBrowserRouter([
             {
                 path: '/services',
                 element: <ServiceList></ServiceList>
+            }
+            ,
+            {
+                path: '/booking',
+                element: <BookingForm></BookingForm>
             }
             
             
