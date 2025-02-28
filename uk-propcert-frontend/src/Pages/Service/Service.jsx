@@ -32,8 +32,7 @@ export default function Service() {
   const [services, setServices] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedService, setSelectedService] = useState(null); // New state for modal
-
+  const [selectedService, setSelectedService] = useState(null); 
   // Fetch categories
   useEffect(() => {
     axios.get(`${ukprop}/categories`)
