@@ -16,7 +16,7 @@ const BookingForm = () => {
 
     const totalPrice = selectedServices.reduce((acc, service) => acc + parseFloat(service.price), 0);
 
-    // random number generator
+    // booking id random number generator
     function generateRandom7DigitNumber() {
         return Math.floor(1000000 + Math.random() * 9000000);
     }
