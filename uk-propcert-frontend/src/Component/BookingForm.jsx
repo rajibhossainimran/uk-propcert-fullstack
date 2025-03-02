@@ -10,7 +10,7 @@ const BookingForm = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Get selected services from state
+  // Get selected services from location state
   const selectedServices = location.state?.selectedServices || [];
     console.log(selectedServices);
 
