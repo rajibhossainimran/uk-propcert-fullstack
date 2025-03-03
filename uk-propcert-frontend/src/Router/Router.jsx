@@ -23,6 +23,7 @@ import Category from '../Dashboard/DashboardPages/Category/Category';
 import CreateServiceForm from '../Dashboard/DashboardPages/CreateService/CreateServiceForm';
 import BookingForm from '../Component/BookingForm';
 import Demo from '../Component/demo';
+import BookingSuccess from '../Component/BookingSuccess';
 
 
 const Router = createBrowserRouter([
@@ -83,6 +84,11 @@ const Router = createBrowserRouter([
             {
                 path: '/booking',
                 element: <BookingForm></BookingForm>
+            }
+            ,
+            {
+                path: '/booking-success',
+                element: <BookingSuccess></BookingSuccess>
             }
             ,
             {

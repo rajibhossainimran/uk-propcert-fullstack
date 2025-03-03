@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppointmentDetailController;
+use App\Http\Controllers\AppointmentServiceController;
 use App\Http\Controllers\ServiceCategoryController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UsersController;
@@ -37,3 +38,10 @@ Route::post('/appointments', [AppointmentDetailController::class, 'store']);
 Route::get('/appointments/{id}', [AppointmentDetailController::class, 'show']);
 Route::put('/appointments/{id}', [AppointmentDetailController::class, 'update']);
 Route::delete('/appointments/{id}', [AppointmentDetailController::class, 'destroy']);
+
+// appointment service route 
+Route::get('/appointment-services', [AppointmentServiceController::class, 'index']);
+Route::post('/appointment-services', [AppointmentServiceController::class, 'store']);
+Route::get('/appointment-services/{id}', [AppointmentServiceController::class, 'show']);
+Route::put('/appointment-services/{id}', [AppointmentServiceController::class, 'update']);
+Route::delete('/appointment-services/{id}', [AppointmentServiceController::class, 'destroy']);

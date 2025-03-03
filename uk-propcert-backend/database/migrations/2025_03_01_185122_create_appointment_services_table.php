@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('appointment_services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('booking_id')->constrained('appointment_details')->onDelete('cascade');
+            $table->unsignedBigInteger('booking_id'); // No foreign key relation
             $table->string('name');
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
-            $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
+            $table->unsignedBigInteger('service_id');
             $table->string('certifier')->nullable();
             $table->timestamps();
         });

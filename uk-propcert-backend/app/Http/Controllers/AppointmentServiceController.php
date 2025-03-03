@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\AppointmentService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class AppointmentServiceController extends Controller
 {
@@ -13,19 +15,23 @@ class AppointmentServiceController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'booking_id' => 'required|exists:appointment_details,booking_id',
-            'name' => 'required|string',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'service_id' => 'required|exists:services,id',
-            'certifier' => 'nullable|string',
-        ]);
+{
+    $services = $request->input('services');
 
-        $service = AppointmentService::create($validatedData);
-        return response()->json($service, 201);
+    foreach ($services as $service) {
+        // Simply store the service without foreign key checks
+        AppointmentService::create([
+            'booking_id'   => $service['booking_id'], // No constraint on this field
+            'name'         => $service['name'],
+            'description'  => $service['description'],
+            'price'        => $service['price'],
+            'service_id'   => $service['service_id'],
+            'certifier' => $service['certifier'] ?? null,
+        ]);
     }
+
+    return response()->json(['success' => true, 'message' => 'Services added successfully!']);
+}
 
     public function show($id)
     {

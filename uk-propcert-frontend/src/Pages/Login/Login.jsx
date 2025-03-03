@@ -46,6 +46,7 @@ export default function Login() {
         const token = data.access_token || data.token || data.api_token;
         localStorage.setItem("accessToken", token);
         localStorage.setItem("userRole", data.user.role);
+        localStorage.setItem("userId", data.user.id); 
 
         // Redirect based on role
         switch (data.user.role) {

@@ -9,10 +9,7 @@ class AppointmentService extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['booking_id', 'name', 'description', 'price', 'service_id', 'certifier_id'];
+    protected $fillable = ['booking_id', 'name', 'description', 'price', 'service_id', 'certifier'];
 
-    public function appointment()
-    {
-        return $this->belongsTo(AppointmentDetail::class, 'booking_id', 'booking_id');
-    }
+    // 
 }
