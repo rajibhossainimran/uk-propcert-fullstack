@@ -24,6 +24,7 @@ import CreateServiceForm from '../Dashboard/DashboardPages/CreateService/CreateS
 import BookingForm from '../Component/BookingForm';
 import Demo from '../Component/demo';
 import BookingSuccess from '../Component/BookingSuccess';
+import CustomerDashDetail from '../customer/CustomerDashDetail';
 
 
 const Router = createBrowserRouter([
@@ -126,8 +127,18 @@ const Router = createBrowserRouter([
     },
     {
         path: '/mydashboard',
-        element: <CustomerDashboard></CustomerDashboard>
-    }
+        element: <CustomerDashboard />, // Parent component
+        children: [
+          {
+            index: true, // This makes the "dashboard" the default route
+            element: <CustomerDashDetail /> // Default child component
+          },
+          {
+            path: 'dashboard',
+            element: <CustomerDashDetail /> // Same component for '/mydashboard/dashboard'
+          },
+        ]
+      }
 ])
 
 export default Router;
