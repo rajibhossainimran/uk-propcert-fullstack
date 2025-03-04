@@ -25,6 +25,9 @@ import BookingForm from '../Component/BookingForm';
 import Demo from '../Component/demo';
 import BookingSuccess from '../Component/BookingSuccess';
 import CustomerDashDetail from '../customer/CustomerDashDetail';
+import CustomerDocument from '../customer/CustomerDocument';
+import InspectorDashboard from '../inspector/InspectorDashboard';
+import InspectorDashDetail from '../inspector/InspectorDashDetail';
 
 
 const Router = createBrowserRouter([
@@ -102,11 +105,15 @@ const Router = createBrowserRouter([
         ]
     },
     {
-        path: '/dashboard',
+        path: '/admin',
         element: <Layoutdashboard></Layoutdashboard>,
         children: [
             {
-                path: 'dashboardhome',
+                index: true, 
+                element: <DashboardHome /> // Default child component
+              },
+            {
+                path: 'dashboard',
                 element: <DashboardHome></DashboardHome>
             },
             {
@@ -127,16 +134,35 @@ const Router = createBrowserRouter([
     },
     {
         path: '/mydashboard',
-        element: <CustomerDashboard />, // Parent component
+        element: <CustomerDashboard />, 
         children: [
           {
-            index: true, // This makes the "dashboard" the default route
+            index: true, 
             element: <CustomerDashDetail /> // Default child component
           },
           {
             path: 'dashboard',
-            element: <CustomerDashDetail /> // Same component for '/mydashboard/dashboard'
+            element: <CustomerDashDetail /> 
           },
+          {
+            path: 'documents',
+            element: <CustomerDocument /> 
+          },
+        ]
+      },
+      {
+        path: '/inspector',
+        element: <InspectorDashboard />, 
+        children: [
+          {
+            index: true, 
+            element: <InspectorDashDetail /> 
+          },
+          {
+            path: 'dashboard',
+            element: <InspectorDashDetail /> 
+          },
+          
         ]
       }
 ])

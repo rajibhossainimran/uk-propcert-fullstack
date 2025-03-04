@@ -10,6 +10,7 @@ const Navbar = () => {
 
   const isLoggedIn = localStorage.getItem("accessToken");
   const userRole = localStorage.getItem("userRole");
+  const userEmail = localStorage.getItem("email");
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -36,6 +37,9 @@ const Navbar = () => {
     { path: "/about", text: "About Us" },
     { path: "/contact", text: "Contact Us" },
   ];
+
+
+
 
   const AuthSection = () => (
     <div className="flex items-center gap-4">
@@ -73,8 +77,8 @@ const Navbar = () => {
           {showDropdown && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-100">
               <div className="px-4 py-2 border-b border-gray-100">
-                <p className="text-sm font-medium text-gray-800">John Doe</p>
-                <p className="text-xs text-gray-500">john@example.com</p>
+                <p className="text-sm font-medium text-gray-800">{userRole}</p>
+                <p className="text-xs text-gray-500">{userEmail}</p>
               </div>
               <Link
                 to={userRole === 'admin' ? '/admin/dashboard' :
@@ -88,7 +92,7 @@ const Navbar = () => {
               >
                 Dashboard
               </Link>
-              <Link
+              {/* <Link
                 to="/profile"
                 className="block px-4 py-2 text-gray-800 hover:bg-lime-50 text-sm"
                 onClick={() => {
@@ -97,7 +101,7 @@ const Navbar = () => {
                 }}
               >
                 Profile Settings
-              </Link>
+              </Link> */}
               <button
                 onClick={handleLogout}
                 className="w-full text-left px-4 py-2 text-gray-800 hover:bg-lime-50 text-sm"
@@ -204,13 +208,17 @@ const Navbar = () => {
                         {showDropdown && (
                           <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50 border border-gray-100">
                             <div className="px-4 py-2 border-b border-gray-100">
-                              <p className="text-sm font-medium text-gray-800">John Doe</p>
-                              <p className="text-xs text-gray-500">john@example.com</p>
+                              <p className="text-sm font-medium text-gray-800">  {userRole ? userRole : "No Role"}
+                              </p>
+                              <p className="text-xs text-gray-500">{  userEmail ? userEmail : "No Email"}
+                            </p>
                             </div>
                             <Link
-                              to={userRole === 'admin' ? '/admin/dashboard' :
-                                userRole === 'inspector' ? '/inspector/dashboard' :
-                                  '/mydashboard'}
+                              to={
+                                userRole === 'admin' ? '/admin/dashboard' :
+                                  userRole === 'inspector' ? '/inspector/dashboard' :
+                                    '/mydashboard'
+                              }
                               className="block px-4 py-2 text-gray-800 hover:bg-lime-50 text-sm"
                               onClick={() => {
                                 setShowDropdown(false);
@@ -219,7 +227,7 @@ const Navbar = () => {
                             >
                               Dashboard
                             </Link>
-                            <Link
+                            {/* <Link
                               to="/profile"
                               className="block px-4 py-2 text-gray-800 hover:bg-lime-50 text-sm"
                               onClick={() => {
@@ -228,7 +236,7 @@ const Navbar = () => {
                               }}
                             >
                               Profile Settings
-                            </Link>
+                            </Link> */}
                             <button
                               onClick={handleLogout}
                               className="w-full text-left px-4 py-2 text-gray-800 hover:bg-lime-50 text-sm"

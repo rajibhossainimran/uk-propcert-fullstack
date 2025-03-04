@@ -47,14 +47,16 @@ export default function Login() {
         localStorage.setItem("accessToken", token);
         localStorage.setItem("userRole", data.user.role);
         localStorage.setItem("userId", data.user.id); 
+        localStorage.setItem("email", data.user.email);
+
 
         // Redirect based on role
         switch (data.user.role) {
           case "admin":
-            navigate("/admin/dashboard");
+            navigate("/admin");
             break;
           case "inspector":
-            navigate("/dashboard");
+            navigate("/inspector");
             break;
           default:
             navigate("/");

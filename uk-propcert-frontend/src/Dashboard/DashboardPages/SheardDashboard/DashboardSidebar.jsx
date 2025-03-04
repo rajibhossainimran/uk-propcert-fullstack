@@ -9,7 +9,7 @@ const DashboardSidebar = () => {
 
   const navLinks = <>
   <li className="hover:bg-gray-800 mb-2 p-2 gap-2 rounded-md flex items-center space-x-2 cursor-pointer">
-      <NavLink to={'dashboardhome'} className="flex items-center">
+      <NavLink to={'dashboard'} className="flex items-center">
           <FaHome />
           <span className="ml-5">Dashboards</span>
       </NavLink>
@@ -41,7 +41,7 @@ const DashboardSidebar = () => {
   <li className="hover:bg-gray-800 mb-2 p-2 gap-2 rounded-md flex items-center space-x-2 cursor-pointer">
       <NavLink to={'/'} className="flex items-center">
           <FaExchangeAlt />
-          <span className="ml-5">Subcontractors</span>
+          <span className="ml-5">Home</span>
       </NavLink>
   </li>
   

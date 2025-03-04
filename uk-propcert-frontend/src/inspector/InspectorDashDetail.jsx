@@ -12,7 +12,7 @@ import {
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-const CustomerDashDetail = () => {
+const InspectorDashDetail = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState('dashboard');
 
@@ -26,6 +26,7 @@ const CustomerDashDetail = () => {
     { id: 1, name: 'Survey Report.pdf', date: '2024-02-15' },
     { id: 2, name: 'Payment Receipt.pdf', date: '2024-02-10' },
   ];
+
   const userRole = localStorage.getItem("userRole");
   const userEmail = localStorage.getItem("email");
   return (
@@ -142,4 +143,4 @@ const CustomerDashDetail = () => {
   );
 };
 
-export default CustomerDashDetail;
+export default InspectorDashDetail;

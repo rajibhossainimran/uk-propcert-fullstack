@@ -2,7 +2,7 @@ import { FiHome, FiFileText, FiSettings, FiArrowLeft } from 'react-icons/fi';
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { Link } from 'react-router-dom';
 
-const CustomerDashSidebar = ({ activeTab, setActiveTab, isMobileMenuOpen }) => {
+const InspectorDashSideber = ({ activeTab, setActiveTab, isMobileMenuOpen }) => {
   return (
     <div className={`fixed md:relative md:block w-64 bg-white h-screen p-4 shadow-lg transform transition-transform duration-300 ${
       isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
@@ -36,4 +36,4 @@ const CustomerDashSidebar = ({ activeTab, setActiveTab, isMobileMenuOpen }) => {
   );
 };
 
-export default CustomerDashSidebar;
+export default InspectorDashSideber;
