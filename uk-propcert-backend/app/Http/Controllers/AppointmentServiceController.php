@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AppointmentService;
+
 use Illuminate\Http\Request;
+use App\Models\AppointmentService;
 use Illuminate\Support\Facades\DB;
 
 
@@ -63,4 +64,50 @@ class AppointmentServiceController extends Controller
         $service->delete();
         return response()->json(['message' => 'Service deleted'], 200);
     }
+
+
+    // get data by status 
+    public function getServiceByStatus($status)
+{
+    $validStatuses = ['pending', 'approved', 'completed'];
+
+    if (!in_array($status, $validStatuses)) {
+        return response()->json(['message' => 'Invalid status'], 400);
+    }
+
+    $services = AppointmentService::where('status', $status)->get();
+
+    if ($services->isEmpty()) {
+        return response()->json(['message' => 'Service not found'], 404);
+    }
+
+    return response()->json($services, 200);
+}
+
+public function updateStatus(Request $request, $id)
+{
+    $validated = $request->validate([
+        'status' => 'required|in:pending,approved,completed',
+        'certifier' => 'required_if:status,approved|nullable|exists:users,id'
+    ]);
+
+    $appointment = AppointmentService::findOrFail($id);
+    
+    $updateData = ['status' => $validated['status']];
+    
+    if ($validated['status'] === 'approved') {
+        $updateData['certifier'] = $validated['certifier'];
+    }
+    
+    if ($validated['status'] === 'completed') {
+        $updateData['order_status'] = 'completed';
+        // Add any additional completion logic here
+    }
+
+    $appointment->update($updateData);
+
+    return response()->json($appointment);
+}
+
+
 }

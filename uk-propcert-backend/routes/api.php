@@ -19,6 +19,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 });
 
+// get inspector data 
+Route::get('/inspectors', [UsersController::class, 'getInspectors']);
 
 // category route 
 
@@ -45,3 +47,9 @@ Route::post('/appointment-services', [AppointmentServiceController::class, 'stor
 Route::get('/appointment-services/{id}', [AppointmentServiceController::class, 'show']);
 Route::put('/appointment-services/{id}', [AppointmentServiceController::class, 'update']);
 Route::delete('/appointment-services/{id}', [AppointmentServiceController::class, 'destroy']);
+
+// get service data by status 
+Route::get('/appointment/{status}', [AppointmentServiceController::class, 'getServiceByStatus']);
+// update status of appointment
+Route::put('/appointment/{id}/{status}', [AppointmentServiceController::class, 'updateStatus']);
+Route::put('/appointment-services/{id}/status', [AppointmentServiceController::class, 'updateStatus']);

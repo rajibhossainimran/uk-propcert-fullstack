@@ -11,7 +11,8 @@ class AppointmentDetail extends Model
 
     protected $fillable = [
         'user_id', 'booking_id', 'name', 'email', 'phone',
-        'property_address', 'property_details', 'date', 'total_price', 'payment_status'
+        'property_address', 'property_details', 'date', 'total_price', 'payment_status','order_status',
+    
     ];
 
     public function services()

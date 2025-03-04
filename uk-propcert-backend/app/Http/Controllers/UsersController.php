@@ -81,4 +81,11 @@ class UsersController extends Controller
             return response()->json(['error' => 'Something went wrong'], 500);
         }
     }
+
+    // Method to fetch inspectors
+    public function getInspectors()
+    {
+        $inspectors = User::where('role', 'inspector')->get();
+        return response()->json(['data' => $inspectors]);
+    }
 }
