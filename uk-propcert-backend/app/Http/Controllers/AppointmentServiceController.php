@@ -110,4 +110,15 @@ public function updateStatus(Request $request, $id)
 }
 
 
+public function getServicesByBookingId($booking_id)
+{
+    $services = AppointmentService::where('booking_id', $booking_id)->get();
+
+    if ($services->isEmpty()) {
+        return response()->json(['message' => 'No services found'], 404);
+    }
+
+    return response()->json($services, 200);
+}
+
 }

@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class AppointmentDetail extends Model
 {
     use HasFactory;
-
+    protected $table = 'appointment_details'; 
     protected $fillable = [
         'user_id', 'booking_id', 'name', 'email', 'phone',
-        'property_address', 'property_details', 'date', 'total_price', 'payment_status','order_status',
+        'property_address', 'property_details', 'date', 'total_price', 'payment_status','order_status','certifier',
     
     ];
 

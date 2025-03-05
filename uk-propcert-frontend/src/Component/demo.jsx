@@ -1,315 +1,270 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import {
+  FiHome,
+  FiCheckCircle,
+  FiClock,
+  FiDollarSign,
+  FiCalendar,
+  FiFileText,
+  FiSettings,
+  FiUser,
+  FiMapPin,
+  FiAlertCircle
+} from 'react-icons/fi';
 
 const Demo = () => {
-  const [appointments, setAppointments] = useState([]);
-  const [statusFilter, setStatusFilter] = useState("pending");
-  const [certifiers, setCertifiers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [updatingId, setUpdatingId] = useState(null);
-  const [selectedAppointment, setSelectedAppointment] = useState(null);
-  const [selectedCertifier, setSelectedCertifier] = useState("");
-  const [showConfirmModal, setShowConfirmModal] = useState(false);
-  const [showCompleteModal, setShowCompleteModal] = useState(false);
+  const [inspections, setInspections] = useState([]);
+  const [selectedInspection, setSelectedInspection] = useState(null);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const userId = localStorage.getItem("userId");
 
-  // Fetch appointments
+  // Mock data - replace with API calls
+  const mockInspections = [
+    {
+      id: 1,
+      propertyAddress: "123 Main St, London",
+      date: "2024-03-20",
+      type: "Gas Safety Check",
+      status: "completed",
+      reportUrl: "/reports/1.pdf"
+    },
+    {
+      id: 2,
+      propertyAddress: "45 Oak Rd, Manchester",
+      date: "2024-03-22",
+      type: "Electrical Inspection",
+      status: "pending"
+    },
+    {
+      id: 3,
+      propertyAddress: "78 Pine Ave, Birmingham",
+      date: "2024-03-25",
+      type: "Fire Risk Assessment",
+      status: "scheduled"
+    }
+  ];
+
+  // Stats calculations
+  const totalInspections = mockInspections.length;
+  const completedInspections = mockInspections.filter(i => i.status === 'completed').length;
+  const pendingInspections = mockInspections.filter(i => i.status === 'pending').length;
+  const totalEarnings = completedInspections * 150; // Assuming £150 per inspection
+
   useEffect(() => {
-    const fetchAppointments = async () => {
+    // Fetch inspector's inspections from API
+    const fetchInspections = async () => {
       try {
-        setLoading(true);
-        const response = await axios.get(
-          `http://127.0.0.1:8000/api/appointment/${statusFilter}`
-        );
-        setAppointments(response.data);
+        // const response = await axios.get(`/api/inspectors/${userId}/inspections`);
+        setInspections(mockInspections);
       } catch (error) {
-        toast.error("Failed to fetch appointments");
-      } finally {
-        setLoading(false);
+        console.error("Error fetching inspections:", error);
       }
     };
-    fetchAppointments();
-  }, [statusFilter]);
+    
+    fetchInspections();
+  }, [userId]);
 
-  // Fetch certifiers
-  useEffect(() => {
-    const fetchCertifiers = async () => {
-      try {
-        const response = await axios.get("http://127.0.0.1:8000/api/inspectors");
-        setCertifiers(response.data.data);
-      } catch (error) {
-        toast.error("Failed to load certifiers");
-      }
-    };
-    fetchCertifiers();
-  }, []);
+  const InspectionDetailsModal = () => (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="p-6">
+          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <FiFileText className="text-lime-700" />
+            Inspection Details
+          </h3>
+          
+          {selectedInspection && (
+            <div className="space-y-4">
+              <div className="flex items-center gap-2">
+                <FiMapPin className="text-gray-600" />
+                <p className="font-medium">{selectedInspection.propertyAddress}</p>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex items-center gap-2">
+                  <FiCalendar className="text-gray-600" />
+                  <span>Date: {selectedInspection.date}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FiAlertCircle className="text-gray-600" />
+                  <span>Type: {selectedInspection.type}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FiCheckCircle className="text-gray-600" />
+                  <span>Status: 
+                    <span className={`ml-2 px-2 py-1 rounded-full text-sm ${
+                      selectedInspection.status === 'completed' ? 'bg-green-100 text-green-800' :
+                      selectedInspection.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                      'bg-blue-100 text-blue-800'
+                    }`}>
+                      {selectedInspection.status}
+                    </span>
+                  </span>
+                </div>
+              </div>
 
-  // Handle approval with certifier assignment
-  const handleApprove = async () => {
-    if (!selectedAppointment || !selectedCertifier) return;
+              {selectedInspection.reportUrl && (
+                <a
+                  href={selectedInspection.reportUrl}
+                  className="inline-flex items-center gap-2 text-lime-700 hover:text-lime-800"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FiFileText /> Download Full Report
+                </a>
+              )}
 
-    try {
-      setUpdatingId(selectedAppointment.id);
-      
-      const response = await axios.put(
-        `http://127.0.0.1:8000/api/appointment-services/${selectedAppointment.id}/status`,
-        {
-          status: "approved",
-          certifier: selectedCertifier
-        }
-      );
-
-      // Update local state
-      setAppointments(prev => prev.map(app => 
-        app.id === selectedAppointment.id ? response.data : app
-      ));
-      
-      toast.success("Certifier assigned and appointment approved");
-    } catch (error) {
-      toast.error("Failed to update appointment");
-      console.error("Update error:", error.response?.data);
-    } finally {
-      setUpdatingId(null);
-      setSelectedAppointment(null);
-      setSelectedCertifier("");
-      setShowConfirmModal(false);
-    }
-  };
-
-  // Handle completion
-  const handleComplete = async () => {
-    if (!selectedAppointment) return;
-
-    try {
-      setUpdatingId(selectedAppointment.id);
-      
-      const response = await axios.put(
-        `http://127.0.0.1:8000/api/appointment-services/${selectedAppointment.id}/status`,
-        {
-          status: "completed"
-        }
-      );
-
-      // Update local state
-      setAppointments(prev => prev.map(app => 
-        app.id === selectedAppointment.id ? response.data : app
-      ));
-      
-      toast.success("Appointment marked as completed");
-    } catch (error) {
-      toast.error("Failed to complete appointment");
-      console.error("Completion error:", error.response?.data);
-    } finally {
-      setUpdatingId(null);
-      setSelectedAppointment(null);
-      setShowCompleteModal(false);
-    }
-  };
-
-  // Status style configuration
-  const statusStyles = {
-    pending: "bg-yellow-100 text-yellow-800",
-    approved: "bg-green-100 text-green-800",
-    completed: "bg-purple-100 text-purple-800",
-  };
-
-  // Approval Modal
-  const ConfirmModal = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full">
-        <h3 className="text-lg font-medium mb-4">Approve Appointment</h3>
-        
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Select Certifier
-          </label>
-          <select
-            value={selectedCertifier}
-            onChange={(e) => setSelectedCertifier(e.target.value)}
-            className="w-full p-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            disabled={updatingId === selectedAppointment?.id}
-          >
-            <option value="">Choose a certifier...</option>
-            {certifiers.map(certifier => (
-              <option key={certifier.id} value={certifier.id}>
-                {certifier.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="flex justify-end space-x-3">
-          <button
-            onClick={() => setShowConfirmModal(false)}
-            className="px-4 py-2 text-gray-500 hover:text-gray-700"
-            disabled={updatingId === selectedAppointment?.id}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleApprove}
-            disabled={!selectedCertifier || updatingId === selectedAppointment?.id}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50"
-          >
-            {updatingId ? "Saving..." : "Confirm Approval"}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
-  // Completion Modal
-  const CompleteModal = () => (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg p-6 max-w-md w-full">
-        <h3 className="text-lg font-medium mb-4">Complete Appointment</h3>
-        <p className="text-gray-600 mb-6">
-          Are you sure you want to mark appointment #{selectedAppointment?.id} as completed?
-        </p>
-        <div className="flex justify-end space-x-3">
-          <button
-            onClick={() => setShowCompleteModal(false)}
-            className="px-4 py-2 text-gray-500 hover:text-gray-700"
-            disabled={updatingId === selectedAppointment?.id}
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleComplete}
-            disabled={updatingId === selectedAppointment?.id}
-            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 disabled:opacity-50"
-          >
-            {updatingId ? "Completing..." : "Confirm"}
-          </button>
+              <button
+                onClick={() => setShowDetailsModal(false)}
+                className="mt-4 w-full bg-lime-700 text-white py-2 rounded-lg hover:bg-lime-800"
+              >
+                Close
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
 
   return (
-    <div className="max-w-6xl mx-auto p-6 bg-white rounded-lg shadow-sm">
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-
-      {showConfirmModal && <ConfirmModal />}
-      {showCompleteModal && <CompleteModal />}
-
-      <div className="mb-8">
-        <h1 className="text-3xl font-semibold text-gray-900">
-          Appointment Management
-        </h1>
-        <p className="text-gray-500 mt-2">
-          Manage and assign property certifications
-        </p>
-      </div>
-
-      {/* Status Filter */}
-      <div className="flex space-x-3 mb-8 border-b pb-6">
-        {["pending", "approved", "completed"].map((status) => (
-          <button
-            key={status}
-            onClick={() => setStatusFilter(status)}
-            className={`px-6 py-2 rounded-full text-sm font-medium transition-colors ${
-              statusFilter === status
-                ? "bg-blue-500 text-white"
-                : "text-gray-500 hover:bg-gray-100"
-            }`}
-          >
-            {status.charAt(0).toUpperCase() + status.slice(1)}
+    <div className="min-h-screen bg-gray-50 mt-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Property Inspector Dashboard</h1>
+            <p className="text-gray-600 mt-1">Welcome back, {localStorage.getItem("userName")}</p>
+          </div>
+          <button className="p-2 hover:bg-gray-100 rounded-full">
+            <FiSettings className="w-6 h-6 text-gray-700" />
           </button>
-        ))}
-      </div>
+        </div>
 
-      {/* Appointments Table */}
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
-        <table className="w-full">
-          <thead className="bg-gray-50">
-            <tr>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service</th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Certifier</th>
-              <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-            </tr>
-          </thead>
-          
-          <tbody className="bg-white divide-y divide-gray-200">
-            {loading ? (
-              <tr>
-                <td colSpan="6" className="px-6 py-8 text-center">
-                  <div className="animate-pulse space-y-4">
-                    <div className="h-4 bg-gray-200 rounded w-1/4 mx-auto"></div>
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-lime-100 rounded-full">
+                <FiCheckCircle className="w-6 h-6 text-lime-700" />
+              </div>
+              <div>
+                <p className="text-gray-500">Completed</p>
+                <p className="text-2xl font-bold">{completedInspections}</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-lime-100 rounded-full">
+                <FiClock className="w-6 h-6 text-lime-700" />
+              </div>
+              <div>
+                <p className="text-gray-500">Pending</p>
+                <p className="text-2xl font-bold">{pendingInspections}</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-lime-100 rounded-full">
+                <FiDollarSign className="w-6 h-6 text-lime-700" />
+              </div>
+              <div>
+                <p className="text-gray-500">Earnings</p>
+                <p className="text-2xl font-bold">£{totalEarnings}</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="p-2 bg-lime-100 rounded-full">
+                <FiHome className="w-6 h-6 text-lime-700" />
+              </div>
+              <div>
+                <p className="text-gray-500">Total</p>
+                <p className="text-2xl font-bold">{totalInspections}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Upcoming Inspections */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-lg shadow-sm p-6">
+              <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                <FiCalendar className="text-lime-700" />
+                Upcoming Inspections
+              </h2>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="text-left border-b">
+                      <th className="pb-3">Property</th>
+                      <th className="pb-3">Date</th>
+                      <th className="pb-3">Type</th>
+                      <th className="pb-3">Status</th>
+                      <th className="pb-3">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mockInspections.map((inspection) => (
+                      <tr key={inspection.id} className="border-b hover:bg-gray-50">
+                        <td className="py-3">{inspection.propertyAddress}</td>
+                        <td className="py-3">{inspection.date}</td>
+                        <td className="py-3">{inspection.type}</td>
+                        <td className="py-3">
+                          <span className={`px-2 py-1 rounded-full text-xs ${
+                            inspection.status === 'completed' ? 'bg-green-100 text-green-800' :
+                            inspection.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                            'bg-blue-100 text-blue-800'
+                          }`}>
+                            {inspection.status}
+                          </span>
+                        </td>
+                        <td className="py-3">
+                          <button
+                            onClick={() => {
+                              setSelectedInspection(inspection);
+                              setShowDetailsModal(true);
+                            }}
+                            className="text-lime-700 hover:text-lime-800"
+                          >
+                            View Details
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          {/* Schedule Calendar */}
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <FiCalendar className="text-lime-700" />
+              Inspection Calendar
+            </h2>
+            <div className="space-y-3">
+              {mockInspections.map((inspection) => (
+                <div key={inspection.id} className="flex items-center gap-3 p-3 hover:bg-gray-50 rounded">
+                  <div className="w-2 h-2 bg-lime-500 rounded-full"></div>
+                  <div>
+                    <p className="font-medium">{inspection.type}</p>
+                    <p className="text-sm text-gray-600">{inspection.date}</p>
                   </div>
-                </td>
-              </tr>
-            ) : appointments.length > 0 ? (
-              appointments.map((appointment) => (
-                <tr key={appointment.id} className="hover:bg-gray-50 transition-colors">
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    #{appointment.id}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-medium">
-                    {appointment.name}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    £{appointment.price}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-3 py-1 rounded-full text-sm ${statusStyles[appointment.status]}`}>
-                      {appointment.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {certifiers.find(c => c.id === appointment.certifier)?.name || "Not assigned"}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex space-x-3">
-                      {appointment.status === "pending" && (
-                        <button
-                          onClick={() => {
-                            setSelectedAppointment(appointment);
-                            setShowConfirmModal(true);
-                          }}
-                          className="text-sm bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md"
-                        >
-                          Assign Certifier
-                        </button>
-                      )}
-                      {appointment.status === "approved" && (
-                        <button
-                          onClick={() => {
-                            setSelectedAppointment(appointment);
-                            setShowCompleteModal(true);
-                          }}
-                          className="text-sm bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md"
-                        >
-                          Mark Complete
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="6" className="px-6 py-8 text-center text-gray-500">
-                  No appointments found in {statusFilter} status
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {showDetailsModal && <InspectionDetailsModal />}
       </div>
     </div>
   );

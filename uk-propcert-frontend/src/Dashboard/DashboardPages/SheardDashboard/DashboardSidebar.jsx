@@ -15,9 +15,15 @@ const DashboardSidebar = () => {
       </NavLink>
   </li>
   <li className="hover:bg-gray-800 mb-2 p-2 gap-2 rounded-md flex items-center space-x-2 cursor-pointer">
-      <NavLink to={'dashboardproperty'} className="flex items-center">
+      <NavLink to={'appointment-services'} className="flex items-center">
           <FaUserTie />
           <span className="ml-5">Appointments</span>
+      </NavLink>
+  </li>
+  <li className="hover:bg-gray-800 mb-2 p-2 gap-2 rounded-md flex items-center space-x-2 cursor-pointer">
+      <NavLink to={'appointments-details'} className="flex items-center">
+          <FaUserTie />
+          <span className="ml-5">Appointments Details</span>
       </NavLink>
   </li>
   <li className="hover:bg-gray-800 mb-2 p-2 gap-2 rounded-md flex items-center space-x-2 cursor-pointer">

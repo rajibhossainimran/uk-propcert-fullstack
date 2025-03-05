@@ -40,6 +40,8 @@ Route::post('/appointments', [AppointmentDetailController::class, 'store']);
 Route::get('/appointments/{id}', [AppointmentDetailController::class, 'show']);
 Route::put('/appointments/{id}', [AppointmentDetailController::class, 'update']);
 Route::delete('/appointments/{id}', [AppointmentDetailController::class, 'destroy']);
+Route::get('/appointment-services/{user_id}', [AppointmentDetailController::class, 'getServicesByUserId']);
+
 
 // appointment service route 
 Route::get('/appointment-services', [AppointmentServiceController::class, 'index']);
@@ -47,6 +49,15 @@ Route::post('/appointment-services', [AppointmentServiceController::class, 'stor
 Route::get('/appointment-services/{id}', [AppointmentServiceController::class, 'show']);
 Route::put('/appointment-services/{id}', [AppointmentServiceController::class, 'update']);
 Route::delete('/appointment-services/{id}', [AppointmentServiceController::class, 'destroy']);
+Route::get('/appointmentServices/{booking_id}', [AppointmentServiceController::class, 'getServicesByBookingId']);
+
+// get service details data by order_status 
+Route::get('/appointmentdetails/{status}', [AppointmentDetailController::class, 'getServiceDetailByStatus']);
+// update status of appointment
+Route::put('/appointmentdetails/{id}/{status}', [AppointmentDetailController::class, 'updateStatus']);
+Route::put('/appointmentdetails-services/{id}/status', [AppointmentDetailController::class, 'updateStatus']);
+
+
 
 // get service data by status 
 Route::get('/appointment/{status}', [AppointmentServiceController::class, 'getServiceByStatus']);

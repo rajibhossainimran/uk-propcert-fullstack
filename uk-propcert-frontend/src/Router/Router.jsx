@@ -13,7 +13,6 @@ import OrderTracking from '../Pages/OrderTracking/OrderTracking';
 import PropertySelector from '../Pages/PropertySelector/PropertySelector';
 import Layoutdashboard from '../Dashboard/DashboardLayout/LayoutDashboard';
 import DashboardHome from '../Dashboard/DashboardPages/DashboardHome/DashboardHome';
-import DashboardProperty from '../Dashboard/DashboardPages/DashboardProperty/DashboardProperty';
 import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import Logout from '../hooks/Logout';
@@ -28,6 +27,8 @@ import CustomerDashDetail from '../customer/CustomerDashDetail';
 import CustomerDocument from '../customer/CustomerDocument';
 import InspectorDashboard from '../inspector/InspectorDashboard';
 import InspectorDashDetail from '../inspector/InspectorDashDetail';
+import DashboardAppointment from '../Dashboard/DashboardPages/DashboardAppointment/DashboardAppointment';
+import AppointmentDetails from '../Dashboard/DashboardPages/AppointDetails/AppointmentDetails';
 
 
 const Router = createBrowserRouter([
@@ -117,8 +118,8 @@ const Router = createBrowserRouter([
                 element: <DashboardHome></DashboardHome>
             },
             {
-                path: 'dashboardproperty',
-                element: <DashboardProperty></DashboardProperty>
+                path: 'appointment-services',
+                element: <DashboardAppointment></DashboardAppointment>
             }
             ,
             {
@@ -129,6 +130,11 @@ const Router = createBrowserRouter([
             {
                 path: 'manage-service',
                 element: <CreateServiceForm></CreateServiceForm>
+            }
+            ,
+            {
+                path: 'appointments-details',
+                element: <AppointmentDetails></AppointmentDetails>
             }
         ]
     },
