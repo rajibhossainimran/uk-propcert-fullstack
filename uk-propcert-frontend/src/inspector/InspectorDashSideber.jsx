@@ -19,10 +19,10 @@ const InspectorDashSideber = ({ activeTab, setActiveTab, isMobileMenuOpen }) => 
           <FiFileText className="w-5 h-5" />
           <span>Done Services</span>
         </Link>
-        <button className={`w-full flex items-center space-x-2 p-2 rounded-lg ${activeTab === 'settings' ? 'bg-lime-100 text-lime-700' : 'text-gray-600 hover:bg-gray-100'}`} onClick={() => setActiveTab('settings')}>
+        <Link to='edit-profile' className={`w-full flex items-center space-x-2 p-2 rounded-lg ${activeTab === 'settings' ? 'bg-lime-100 text-lime-700' : 'text-gray-600 hover:bg-gray-100'}`} onClick={() => setActiveTab('settings')}>
           <FiSettings className="w-5 h-5" />
           <span>Settings</span>
-        </button>
+        </Link>
         <Link to='/' className={`w-full flex items-center space-x-2 p-2 rounded-lg ${activeTab === 'home' ? 'bg-lime-100 text-lime-700' : 'text-gray-600 hover:bg-gray-100'}`} onClick={() => setActiveTab('home')}>
           <FiArrowLeft className="w-5 h-5" />
           <span>Home</span>

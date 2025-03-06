@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const Demo = () => {
+const CustomerCertificate = () => {
   const [appointments2, setAppointments2] = useState([]);
   const [appointments, setAppointments] = useState([]);
   const [error, setError] = useState(null);
@@ -39,7 +39,7 @@ const Demo = () => {
 
   // ✅ Fetch Detailed Services (Second API Call after `appointments2` is ready)
   useEffect(() => {
-    if (appointments2.length === 0) return; // ✅ Prevents fetching on first render
+    if (appointments2.length === 0) return;
 
     const fetchData = async () => {
       setLoading(true);
@@ -52,7 +52,6 @@ const Demo = () => {
           )
         );
 
-        // Flatten the nested arrays
         setAppointments(responses.flat());
       } catch (error) {
         setError("Error fetching appointment services.");
@@ -62,66 +61,73 @@ const Demo = () => {
     };
 
     fetchData();
-  }, [appointments2]); // ✅ Runs only when `appointments2` updates
+  }, [appointments2]);
 
-  console.log(appointments);
+  // ✅ Filter Completed Appointments
+  const completedAppointments = appointments.filter(
+    (appointment) => appointment.status === "completed"
+  );
 
   return (
     <div className="container mx-auto p-6 mt-20">
-      <h2 className="text-2xl font-bold mb-4 text-lime-900"> Services Certicicates</h2>
+      <h2 className="text-3xl font-bold mb-6 text-center text-lime-900">
+        Completed Service Certificates
+      </h2>
 
       {loading ? (
-        <p className="text-center text-gray-500">Loading...</p>
+        <p className="text-center text-gray-500 text-lg">Loading...</p>
       ) : error ? (
-        <p className="text-center text-red-500">{error}</p>
+        <p className="text-center text-red-500 text-lg">{error}</p>
+      ) : completedAppointments.length === 0 ? (
+        <p className="text-center text-gray-700 text-lg">No completed services found.</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {appointments.map((appointment) => (
-            <div key={appointment.id} className="bg-white border rounded-lg shadow-lg p-4">
-              <h3 className="text-lg font-bold mb-2 text-lime-800">{appointment.name}</h3>
+          {completedAppointments.map((appointment) => (
+            <div
+              key={appointment.id}
+              className="bg-white border-l-4 border-green-500 rounded-lg shadow-lg p-5 transition-transform duration-300 hover:scale-105"
+            >
+              <h3 className="text-xl font-semibold mb-2 text-lime-800">
+                {appointment.name}
+              </h3>
               <p className="text-gray-600 text-sm">{appointment.description}</p>
 
-              <div className="mt-3">
-                <p className="py-2"><span className="font-semibold py-2">Booking ID:</span> {appointment.booking_id}</p>
-                <p className="py-2">
-                  <span className="font-semibold py-2">Status:</span>{" "}
-                  <span
-                    className={`px-2 py-1 rounded text-white ${
-                      appointment.status === "completed"
-                        ? "bg-green-500"
-                        : "bg-yellow-500"
-                    }`}
-                  >
+              <div className="mt-4 space-y-2 text-sm">
+                <p><span className="font-semibold text-gray-700">Booking ID:</span> {appointment.booking_id}</p>
+                <p>
+                  <span className="font-semibold text-gray-700">Status:</span>{" "}
+                  <span className="px-3 py-1 text-xs font-medium uppercase tracking-wide rounded-full bg-green-500 text-white">
                     {appointment.status}
                   </span>
                 </p>
-                <p className="py-2"><span className="font-semibold">Price:</span> ${appointment.price}</p>
-                <p className="py-2"><span className="font-semibold">Issued:</span> {appointment.issued}</p>
-                <p className="py-2"><span className="font-semibold">Expire:</span> {appointment.expire}</p>
-                <div className="flex items-center space-x-2">
-                  <span className="font-semibold text-sm">Certificate URL:</span>
+                <p><span className="font-semibold">Price:</span> ${appointment.price}</p>
+                <p><span className="font-semibold">Issued:</span> {appointment.issued}</p>
+                <p><span className="font-semibold">Expire:</span> {appointment.expire}</p>
+
+                {/* Certificate URL with Copy Button */}
+                <div className="flex items-center space-x-2 bg-gray-100 p-2 rounded-md mt-2">
                   <input
                     type="text"
                     value={appointment.certificate_img}
                     readOnly
-                    className="w-full border px-2 py-1 text-sm bg-gray-100 rounded"
+                    className="w-full text-xs border-none bg-transparent text-gray-600 outline-none"
                   />
                   <button
                     onClick={() => navigator.clipboard.writeText(appointment.certificate_img)}
-                    className="bg-blue-500 text-white px-2 py-1 text-xs rounded hover:bg-blue-600"
+                    className="p-1 rounded bg-blue-500 hover:bg-blue-600 text-white transition"
                   >
                     Copy
                   </button>
                 </div>
-
               </div>
 
+              {/* Certificate Image */}
               {appointment.certificate_img && (
-                <div className="mt-3">
+                <div className="mt-4">
                   <img
                     src={appointment.certificate_img}
                     alt="Certificate"
-                    className="w-full h-40 object-cover rounded-lg"
+                    className="w-full h-40 object-cover rounded-lg shadow-md"
                   />
                 </div>
               )}
@@ -133,4 +139,4 @@ const Demo = () => {
   );
 };
 
-export default Demo;
+export default CustomerCertificate;

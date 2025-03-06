@@ -30,6 +30,8 @@ import InspectorDashDetail from '../inspector/InspectorDashDetail';
 import DashboardAppointment from '../Dashboard/DashboardPages/DashboardAppointment/DashboardAppointment';
 import AppointmentDetails from '../Dashboard/DashboardPages/AppointDetails/AppointmentDetails';
 import InspectorAllService from '../inspector/InspectorAllService';
+import EditProfile from '../Component/demo';
+import CustomerCertificate from '../customer/CustomerCertificate';
 
 
 const Router = createBrowserRouter([
@@ -153,8 +155,9 @@ const Router = createBrowserRouter([
           },
           {
             path: 'documents',
-            element: <CustomerDocument /> 
+            element: <CustomerCertificate/> 
           },
+          
         ]
       },
       {
@@ -172,6 +175,10 @@ const Router = createBrowserRouter([
           {
             path: 'all-services',
             element: <InspectorAllService/>
+          },
+          {
+            path: 'edit-profile',
+            element: <EditProfile/>
           },
           
         ]
