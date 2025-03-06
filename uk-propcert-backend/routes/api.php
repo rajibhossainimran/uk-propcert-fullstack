@@ -41,15 +41,21 @@ Route::get('/appointments/{id}', [AppointmentDetailController::class, 'show']);
 Route::put('/appointments/{id}', [AppointmentDetailController::class, 'update']);
 Route::delete('/appointments/{id}', [AppointmentDetailController::class, 'destroy']);
 Route::get('/appointment-services/{user_id}', [AppointmentDetailController::class, 'getServicesByUserId']);
+Route::get('/appointmentdetails/{booking_id}', [AppointmentDetailController::class, 'getServicesDetailByBookingId']);
 
-
-// appointment service route 
+// appointment service route getServicesDetailByBookingId
 Route::get('/appointment-services', [AppointmentServiceController::class, 'index']);
 Route::post('/appointment-services', [AppointmentServiceController::class, 'store']);
 Route::get('/appointment-services/{id}', [AppointmentServiceController::class, 'show']);
 Route::put('/appointment-services/{id}', [AppointmentServiceController::class, 'update']);
 Route::delete('/appointment-services/{id}', [AppointmentServiceController::class, 'destroy']);
 Route::get('/appointmentServices/{booking_id}', [AppointmentServiceController::class, 'getServicesByBookingId']);
+// get approved services 
+Route::get('/approvedservices/{user_id}', [AppointmentServiceController::class, 'getApprovedServicesByUserId']);
+// put completed services by inspector 
+Route::put('/appointment-services/{id}/update-status', [AppointmentServiceController::class, 'updateStatusComplete']);
+// get inspector completed services 
+Route::get('completedservices/{user_id}', [AppointmentServiceController::class, 'getCompletedServices']);
 
 // get service details data by order_status 
 Route::get('/appointmentdetails/{status}', [AppointmentDetailController::class, 'getServiceDetailByStatus']);

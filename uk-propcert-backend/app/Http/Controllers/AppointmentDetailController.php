@@ -121,4 +121,23 @@ class AppointmentDetailController extends Controller
         return response()->json($services, 200);
     }
 
+
+    public function getServicesDetailByBookingId($booking_id)
+    {
+        $service = AppointmentDetail::where('booking_id', $booking_id)->first();
+    
+        if (!$service) {
+            return response()->json(['message' => 'No services found'], 404);
+        }
+    
+        return response()->json([
+            "name" => $service->name,
+            "email" => $service->email,
+            "details" => $service->property_details, // Assuming 'property_details' is the correct column
+            "address" => $service->property_address, // Assuming 'property_address' is the correct column
+            "phone" => $service->phone,
+            "date" => $service->date,
+            "order_status" => $service->order_status
+        ], 200);
+    }
 }

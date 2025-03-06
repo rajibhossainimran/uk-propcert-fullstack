@@ -6,7 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AppointmentService;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class AppointmentServiceController extends Controller
 {
@@ -119,6 +120,61 @@ public function getServicesByBookingId($booking_id)
     }
 
     return response()->json($services, 200);
+}
+
+public function getApprovedServicesByUserId($user_id)
+{
+    $services = AppointmentService::where('certifier', $user_id)
+                                  ->where('status', 'approved')
+                                  ->get();
+
+    if ($services->isEmpty()) {
+        return response()->json(['message' => 'No approved services found'], 404);
+    }
+
+    return response()->json($services, 200);
+}
+
+public function updateStatusComplete(Request $request, $id)
+{
+    $validated = $request->validate([
+        'status' => 'required|in:pending,approved,completed',
+        'certificate_img' => 'required_if:status,completed|url',
+        'issued' => 'required_if:status,completed|date',
+        'expire' => 'required_if:status,completed|date',
+        'submit_date' => 'required_if:status,completed|date',
+    ]);
+
+    $appointment = AppointmentService::findOrFail($id);
+    
+    $updateData = [
+        'status' => $validated['status'],
+        'certificate_img' => $validated['certificate_img'] ?? null,
+        'issued' => $validated['issued'] ?? null,
+        'expire' => $validated['expire'] ?? null,
+        'submit_date' => $validated['submit_date'] ?? null,
+    ];
+
+    if ($validated['status'] === 'completed') {
+        $updateData['order_status'] = 'completed';
+    }
+
+    $appointment->update($updateData);
+
+    return response()->json($appointment);
+}
+
+
+// get inspector all services 
+public function getCompletedServices($user_id)
+{
+    // Query to fetch services where user_id matches and status is 'completed'
+    $services = AppointmentService::where('certifier', $user_id)
+                       ->where('status', 'completed')
+                       ->get();
+
+    // Return the services as JSON
+    return response()->json($services);
 }
 
 }

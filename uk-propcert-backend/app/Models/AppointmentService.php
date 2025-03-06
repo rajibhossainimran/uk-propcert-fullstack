@@ -23,5 +23,7 @@ class AppointmentService extends Model
         'status',
         'order_status',
         'certificate',
+        'certificate_img', 
+        'submit_date'
     ];
 }
