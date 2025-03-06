@@ -11,13 +11,13 @@ const InspectorDashSideber = ({ activeTab, setActiveTab, isMobileMenuOpen }) => 
         <h2 className="text-xl font-bold text-lime-700">UK PROPCERT</h2>
       </div>
       <nav className="space-y-2">
-        <Link to="/mydashboard/dashboard" className={`w-full flex items-center space-x-2 p-2 rounded-lg ${activeTab === 'dashboard' ? 'bg-lime-100 text-lime-700' : 'text-gray-600 hover:bg-gray-100'}`} onClick={() => setActiveTab('/mydashboard/dashboard')}>
+        <Link to="/inspector/dashboard" className={`w-full flex items-center space-x-2 p-2 rounded-lg ${activeTab === 'dashboard' ? 'bg-lime-100 text-lime-700' : 'text-gray-600 hover:bg-gray-100'}`} onClick={() => setActiveTab('/mydashboard/dashboard')}>
           <FiHome className="w-5 h-5" />
           <span>Dashboard</span>
         </Link>
-        <Link to="documents" className={`w-full flex items-center space-x-2 p-2 rounded-lg ${activeTab === 'documents' ? 'bg-lime-100 text-lime-700' : 'text-gray-600 hover:bg-gray-100'}`} onClick={() => setActiveTab('documents')}>
+        <Link to="all-services" className={`w-full flex items-center space-x-2 p-2 rounded-lg ${activeTab === 'documents' ? 'bg-lime-100 text-lime-700' : 'text-gray-600 hover:bg-gray-100'}`} onClick={() => setActiveTab('documents')}>
           <FiFileText className="w-5 h-5" />
-          <span>Documents</span>
+          <span>Done Services</span>
         </Link>
         <button className={`w-full flex items-center space-x-2 p-2 rounded-lg ${activeTab === 'settings' ? 'bg-lime-100 text-lime-700' : 'text-gray-600 hover:bg-gray-100'}`} onClick={() => setActiveTab('settings')}>
           <FiSettings className="w-5 h-5" />

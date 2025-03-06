@@ -29,6 +29,7 @@ import InspectorDashboard from '../inspector/InspectorDashboard';
 import InspectorDashDetail from '../inspector/InspectorDashDetail';
 import DashboardAppointment from '../Dashboard/DashboardPages/DashboardAppointment/DashboardAppointment';
 import AppointmentDetails from '../Dashboard/DashboardPages/AppointDetails/AppointmentDetails';
+import InspectorAllService from '../inspector/InspectorAllService';
 
 
 const Router = createBrowserRouter([
@@ -167,6 +168,10 @@ const Router = createBrowserRouter([
           {
             path: 'dashboard',
             element: <InspectorDashDetail /> 
+          },
+          {
+            path: 'all-services',
+            element: <InspectorAllService/>
           },
           
         ]
