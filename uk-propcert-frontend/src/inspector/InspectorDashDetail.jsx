@@ -107,7 +107,8 @@ const InspectorDashDetail = () => {
       setError(err.response?.data?.message || "Update failed");
 
       // Error message
-      toast.error("Failed to update service status!", {
+       // Success message
+       toast.success("Service status updated successfully!", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
