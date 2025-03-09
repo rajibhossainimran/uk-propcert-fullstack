@@ -10,7 +10,7 @@ const InspectorAllService = () => {
 
   const userId = localStorage.getItem("userId");
 
-  // Fetch completed services
+  // Fetch completed services data
   useEffect(() => {
     if (!userId) return;
 
