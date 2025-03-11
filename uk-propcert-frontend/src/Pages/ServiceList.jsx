@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { ukprop } from "../Url/config";
 
 const ServiceList = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/categories")
+    axios.get(`${ukprop}/categories`)
       .then(response => setCategories(response.data))
       .catch(error => console.error(error));
   }, []);
@@ -27,7 +28,7 @@ const ServiceCategory = ({ categoryId }) => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    axios.get("http://127.0.0.1:8000/api/services")
+    axios.get(`${ukprop}/services`)
       .then(response => {
         const filteredServices = response.data.filter(service => service.category.id === categoryId);
         setServices(filteredServices);
