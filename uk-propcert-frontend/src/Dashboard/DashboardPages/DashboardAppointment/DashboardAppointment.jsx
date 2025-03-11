@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ukprop } from "../../../Url/config";
 
 const DashboardAppointment = () => {
   const [appointments, setAppointments] = useState([]);
@@ -20,7 +21,7 @@ const DashboardAppointment = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/appointment/${statusFilter}`
+          `${ukprop}/appointment/${statusFilter}`
         );
         setAppointments(response.data);
       } catch (error) {
@@ -36,7 +37,7 @@ const DashboardAppointment = () => {
   useEffect(() => {
     const fetchCertifiers = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/inspectors");
+        const response = await axios.get(`${ukprop}/inspectors`);
         setCertifiers(response.data.data);
       } catch (error) {
         toast.error("Failed to load certifiers");
@@ -53,7 +54,7 @@ const DashboardAppointment = () => {
       setUpdatingId(selectedAppointment.id);
       
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/appointment-services/${selectedAppointment.id}/status`,
+        `${ukprop}/appointment-services/${selectedAppointment.id}/status`,
         {
           status: "approved",
           certifier: selectedCertifier
@@ -85,7 +86,7 @@ const DashboardAppointment = () => {
       setUpdatingId(selectedAppointment.id);
       
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/appointment-services/${selectedAppointment.id}/status`,
+        `${ukprop}/appointment-services/${selectedAppointment.id}/status`,
         {
           status: "completed"
         }

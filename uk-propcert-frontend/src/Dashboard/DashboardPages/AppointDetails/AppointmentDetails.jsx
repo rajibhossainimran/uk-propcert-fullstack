@@ -54,7 +54,7 @@ const AppointmentDetails = () => {
       setUpdatingId(selectedAppointment.id);
       
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/appointmentdetails-services/${selectedAppointment.id}/status`,
+        `${ukprop}/appointmentdetails-services/${selectedAppointment.id}/status`,
         {
           order_status: "approved",
           certifier: selectedCertifier
@@ -86,7 +86,7 @@ const AppointmentDetails = () => {
       setUpdatingId(selectedAppointment.id);
       
       const response = await axios.put(
-        `http://127.0.0.1:8000/api/appointmentdetails-services/${selectedAppointment.id}/status`,
+        `${ukprop}/appointmentdetails-services/${selectedAppointment.id}/status`,
         {
           order_status: "completed" 
         }
