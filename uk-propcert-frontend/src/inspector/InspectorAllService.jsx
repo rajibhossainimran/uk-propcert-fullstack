@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ukprop } from "../Url/config";
 
 const InspectorAllService = () => {
   const [completedServices, setCompletedServices] = useState([]);
@@ -17,7 +18,7 @@ const InspectorAllService = () => {
     const fetchCompletedServices = async () => {
       try {
         const { data } = await axios.get(
-          `http://127.0.0.1:8000/api/completedservices/${userId}`
+          `${ukprop}/completedservices/${userId}`
         );
         setCompletedServices(data);
         setLoading(false);

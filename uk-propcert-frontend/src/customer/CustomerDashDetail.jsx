@@ -13,6 +13,7 @@ import {
   FiX
 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { ukprop } from '../Url/config';
 
 const CustomerDashDetail = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -27,7 +28,7 @@ const CustomerDashDetail = () => {
   // Fetch appointments using user_id 
   const fetchAppointmentsByUserId = async (userId) => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/appointment-services/${userId}`);
+      const response = await axios.get(`${ukprop}/appointment-services/${userId}`);
       setAppointments(response.data);
     } catch (error) {
       console.error("Error fetching appointments:", error.response?.data?.message || error.message);
@@ -37,7 +38,7 @@ const CustomerDashDetail = () => {
   // Fetch services for a specific booking
   const fetchServicesByBookingId = async (bookingId) => {
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/appointmentServices/${bookingId}`);
+      const response = await axios.get(`${ukprop}/appointmentServices/${bookingId}`);
       setSelectedServices(response.data);
       setServicesModalOpen(true);
     } catch (error) {

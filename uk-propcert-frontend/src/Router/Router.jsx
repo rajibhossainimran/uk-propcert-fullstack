@@ -2,11 +2,9 @@ import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
 import Root from '../Layout/Root';
 import Home from '../Pages/Home/Home';
-import Agents from '../Pages/Agents/Agents';
 import Contact from '../Pages/Contact/Contact';
 import About from '../Pages/About/About';
 import Service from '../Pages/Service/Service';
-import NewProperty from '../NewProperties/NewProperty';
 import FAQ from '../Pages/FAQ/FAQ';
 import Blogs from '../Pages/Blogs/Blogs';
 import OrderTracking from '../Pages/OrderTracking/OrderTracking';
@@ -114,7 +112,7 @@ const Router = createBrowserRouter([
         children: [
             {
                 index: true, 
-                element: <DashboardHome /> // Default child component
+                element: <DashboardHome /> 
               },
             {
                 path: 'dashboard',
@@ -147,7 +145,7 @@ const Router = createBrowserRouter([
         children: [
           {
             index: true, 
-            element: <CustomerDashDetail /> // Default child component
+            element: <CustomerDashDetail /> 
           },
           {
             path: 'dashboard',

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { ukprop } from "../Url/config";
 
 const CustomerCertificate = () => {
   const [appointments2, setAppointments2] = useState([]);
@@ -7,7 +8,7 @@ const CustomerCertificate = () => {
   const [loading, setLoading] = useState(true);
 
   const userId = localStorage.getItem("userId");
-  const apiBaseUrl = "http://127.0.0.1:8000/api/appointmentServices/";
+  const apiBaseUrl = `${ukprop}/appointmentServices/`;
 
   // ✅ Fetch Appointments (First API Call)
   useEffect(() => {
@@ -20,7 +21,7 @@ const CustomerCertificate = () => {
 
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/appointment-services/${userId}`
+          `${ukprop}/appointment-services/${userId}`
         );
 
         if (!response.ok) {

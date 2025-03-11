@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ukprop } from "../../../Url/config";
 
 const AppointmentDetails = () => {
   const [appointments, setAppointments] = useState([]);
@@ -20,7 +21,7 @@ const AppointmentDetails = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://127.0.0.1:8000/api/appointmentdetails/${statusFilter}`
+          `${ukprop}/appointmentdetails/${statusFilter}`
         );
         setAppointments(response.data);
       } catch (error) {
@@ -36,7 +37,7 @@ const AppointmentDetails = () => {
   useEffect(() => {
     const fetchCertifiers = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/inspectors");
+        const response = await axios.get(`${ukprop}/inspectors`);
         setCertifiers(response.data.data);
       } catch (error) {
         toast.error("Failed to load certifiers");

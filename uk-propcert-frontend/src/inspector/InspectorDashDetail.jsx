@@ -4,6 +4,7 @@ import { FiBell, FiX } from "react-icons/fi";
 import { Transition } from "@headlessui/react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Make sure to import Toastify CSS
+import { ukprop } from "../Url/config";
 
 const InspectorDashDetail = () => {
   // State management
@@ -72,13 +73,13 @@ const InspectorDashDetail = () => {
     e.preventDefault();
     try {
       await axios.put(
-        `http://127.0.0.1:8000/api/appointment-services/${currentServiceId}/update-status`,
+        `${ukprop}/appointment-services/${currentServiceId}/update-status`,
         formData
       );
 
       // Refresh services list
       const { data } = await axios.get(
-        `http://127.0.0.1:8000/api/approvedservices/${userId}`
+        `${ukprop}/approvedservices/${userId}`
       );
       setServices(data);
 
