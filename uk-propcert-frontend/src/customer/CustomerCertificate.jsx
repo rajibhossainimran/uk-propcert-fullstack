@@ -20,18 +20,17 @@ const CustomerCertificate = () => {
       }
 
       try {
-        const response = await fetch(
-          `${ukprop}/appointment-services/${userId}`
-        );
-
+        const response = await fetch(`${ukprop}/appointment-services/${userId}`);
         if (!response.ok) {
-          throw new Error("Failed to fetch data");
+          throw new Error("No data is available.");
         }
 
         const data = await response.json();
         setAppointments2(data);
       } catch (error) {
         setError(error.message);
+      } finally {
+        setLoading(false); // ✅ Ensure loading stops after API call
       }
     };
 
@@ -40,16 +39,19 @@ const CustomerCertificate = () => {
 
   // ✅ Fetch Detailed Services (Second API Call after `appointments2` is ready)
   useEffect(() => {
-    if (appointments2.length === 0) return;
+    if (appointments2.length === 0) {
+      setLoading(false); // ✅ Stop loading if no appointments found
+      return;
+    }
 
     const fetchData = async () => {
-      setLoading(true);
+      setLoading(true); // ✅ Start loading when fetching services
       try {
-        const bookingIds = appointments2.map(item => item.booking_id);
+        const bookingIds = appointments2.map((item) => item.booking_id);
 
         const responses = await Promise.all(
-          bookingIds.map(id =>
-            fetch(`${apiBaseUrl}${id}`).then(res => res.json())
+          bookingIds.map((id) =>
+            fetch(`${apiBaseUrl}${id}`).then((res) => res.json())
           )
         );
 
@@ -57,7 +59,7 @@ const CustomerCertificate = () => {
       } catch (error) {
         setError("Error fetching appointment services.");
       } finally {
-        setLoading(false);
+        setLoading(false); // ✅ Ensure loading stops after API call
       }
     };
 
@@ -80,7 +82,9 @@ const CustomerCertificate = () => {
       ) : error ? (
         <p className="text-center text-red-500 text-lg">{error}</p>
       ) : completedAppointments.length === 0 ? (
-        <p className="text-center text-gray-700 text-lg">No completed services found.</p>
+        <p className="text-center text-gray-700 mt-20 text-2xl">
+          No completed services found.
+        </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {completedAppointments.map((appointment) => (
@@ -94,36 +98,58 @@ const CustomerCertificate = () => {
               <p className="text-gray-600 text-sm">{appointment.description}</p>
 
               <div className="mt-4 space-y-2 text-sm">
-                <p><span className="font-semibold text-gray-700">Booking ID:</span> {appointment.booking_id}</p>
+                <p>
+                  <span className="font-semibold text-gray-700">
+                    Booking ID:
+                  </span>{" "}
+                  {appointment.booking_id}
+                </p>
                 <p>
                   <span className="font-semibold text-gray-700">Status:</span>{" "}
                   <span className="px-3 py-1 text-xs font-medium uppercase tracking-wide rounded-full bg-green-500 text-white">
                     {appointment.status}
                   </span>
                 </p>
-                <p><span className="font-semibold">Price:</span> ${appointment.price}</p>
-                <p><span className="font-semibold">Issued:</span> {appointment.issued}</p>
-                <p><span className="font-semibold">Expire:</span> {appointment.expire}</p>
+                <p>
+                  <span className="font-semibold">Price:</span> $
+                  {appointment.price}
+                </p>
+                <p>
+                  <span className="font-semibold">Issued:</span>{" "}
+                  {appointment.issued}
+                </p>
+                <p>
+                  <span className="font-semibold">Expire:</span>{" "}
+                  {appointment.expire}
+                </p>
 
                 {/* Certificate URL with Copy Button */}
-                <div className="flex items-center space-x-2 bg-gray-100 p-2 rounded-md mt-2">
-                  <input
-                    type="text"
-                    value={appointment.certificate_img}
-                    readOnly
-                    className="w-full text-xs border-none bg-transparent text-gray-600 outline-none"
-                  />
-                  <button
-                    onClick={() => navigator.clipboard.writeText(appointment.certificate_img)}
-                    className="p-1 rounded bg-blue-500 hover:bg-blue-600 text-white transition"
-                  >
-                    Copy
-                  </button>
-                </div>
+                {appointment.certificate_img ? (
+                  <div className="flex items-center space-x-2 bg-gray-100 p-2 rounded-md mt-2">
+                    <input
+                      type="text"
+                      value={appointment.certificate_img}
+                      readOnly
+                      className="w-full text-xs border-none bg-transparent text-gray-600 outline-none"
+                    />
+                    <button
+                      onClick={() =>
+                        navigator.clipboard.writeText(appointment.certificate_img)
+                      }
+                      className="p-1 rounded bg-blue-500 hover:bg-blue-600 text-white transition"
+                    >
+                      Copy
+                    </button>
+                  </div>
+                ) : (
+                  <p className="text-sm text-red-500 font-medium mt-4">
+                    No certificate is available.
+                  </p>
+                )}
               </div>
 
-              {/* Certificate Image */}
-              {appointment.certificate_img && (
+              {/* Certificate Image or Message */}
+              {appointment.certificate_img ? (
                 <div className="mt-4">
                   <img
                     src={appointment.certificate_img}
@@ -131,6 +157,10 @@ const CustomerCertificate = () => {
                     className="w-full h-40 object-cover rounded-lg shadow-md"
                   />
                 </div>
+              ) : (
+                <p className="text-sm text-red-500 font-medium mt-4">
+                  No certificate is available.
+                </p>
               )}
             </div>
           ))}
