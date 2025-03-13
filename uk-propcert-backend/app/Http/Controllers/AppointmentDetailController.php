@@ -79,11 +79,13 @@ class AppointmentDetailController extends Controller
             $services = AppointmentDetail::where('order_status', $status)->get();
         
             if ($services->isEmpty()) {
-                return response()->json(['message' => 'Service not found'], 404);
+                return response()->json(['message' => 'No services found'], 404);
             }
         
             return response()->json($services, 200);
         }
+        
+        
 
         public function updateStatus(Request $request, $id)
         {

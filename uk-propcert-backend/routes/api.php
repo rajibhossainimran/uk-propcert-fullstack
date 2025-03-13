@@ -58,7 +58,7 @@ Route::put('/appointment-services/{id}/update-status', [AppointmentServiceContro
 Route::get('completedservices/{user_id}', [AppointmentServiceController::class, 'getCompletedServices']);
 
 // get service details data by order_status 
-Route::get('/appointmentdetails/{status}', [AppointmentDetailController::class, 'getServiceDetailByStatus']);
+Route::get('/appointmentdetail/{status}', [AppointmentDetailController::class, 'getServiceDetailByStatus']);
 // update status of appointment
 Route::put('/appointmentdetails/{id}/{status}', [AppointmentDetailController::class, 'updateStatus']);
 Route::put('/appointmentdetails-services/{id}/status', [AppointmentDetailController::class, 'updateStatus']);

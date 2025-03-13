@@ -21,7 +21,7 @@ const AppointmentDetails = () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `${ukprop}/appointmentdetails/${statusFilter}`
+          `${ukprop}/appointmentdetail/${statusFilter}`
         );
         setAppointments(response.data);
       } catch (error) {
