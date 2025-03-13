@@ -250,9 +250,9 @@ const NavbarDashboard = () => {
               <ul
                 tabIndex={0}
                 className="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-56 p-2 shadow-md">
-                <li className='font-semibold'><a href=""><FontAwesomeIcon icon={faCalendarDays} /> My Schedules</a></li>
-                <li className='font-semibold'><a href=""><FontAwesomeIcon icon={faTicket} /> Pricing</a></li>
-                <li className='font-semibold'><a href=""><FontAwesomeIcon icon={faCircleInfo} /> Help</a></li>
+                
+                
+                <li className='font-semibold'><a href="#"><FontAwesomeIcon icon={faCircleInfo} />Admin</a></li>
                 <li className='font-semibold'><a href=""><FontAwesomeIcon icon={faUser} /> Update Profile</a></li>
                 <hr />
                 <li className='font-semibold'>
