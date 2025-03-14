@@ -104,7 +104,7 @@ class AppointmentDetailController extends Controller
             
             if ($validated['order_status'] === 'completed') {
                 $updateData['order_status'] = 'completed';
-                // Add any additional completion logic here
+                
             }
 
             $appointment->update($updateData);
@@ -135,8 +135,8 @@ class AppointmentDetailController extends Controller
         return response()->json([
             "name" => $service->name,
             "email" => $service->email,
-            "details" => $service->property_details, // Assuming 'property_details' is the correct column
-            "address" => $service->property_address, // Assuming 'property_address' is the correct column
+            "details" => $service->property_details, 
+            "address" => $service->property_address,
             "phone" => $service->phone,
             "date" => $service->date,
             "order_status" => $service->order_status

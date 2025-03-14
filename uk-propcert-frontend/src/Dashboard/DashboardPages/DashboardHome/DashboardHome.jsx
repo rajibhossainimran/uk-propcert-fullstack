@@ -6,7 +6,7 @@ import { Home, Briefcase } from "lucide-react";
 
 const DashboardHome = () => {
 
-    // Total Propetrty Card Chart
+    // Total Agent, Property, Customer, Revenue
     const options = {
         chart: {
           type: "bar",
@@ -127,7 +127,7 @@ const DashboardHome = () => {
     
     return (    
         <div className='px-8 pt-28 w-[100%] '>
-            {/* Card Of Toatal Agent, Property etc ........ */}
+            {/* Card Of Toatal Agent, Property etc*/}
             <div className='flex gap-5 justify-between  items-center'>
                 <div className='flex-1 flex justify-between px-4 py-3  w-[17.6rem] bg-[#ececec] dark:bg-gray-800 rounded-lg shadow-md '>
                     <div className='mt-5'>
@@ -322,7 +322,6 @@ const DashboardHome = () => {
                 {/* Card And Map */}
 
 
-                {/* Card And Map */}
 
                 {/* Last Transition  */}
 
