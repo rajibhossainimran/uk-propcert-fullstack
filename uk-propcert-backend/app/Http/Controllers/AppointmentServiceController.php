@@ -23,7 +23,7 @@ class AppointmentServiceController extends Controller
     foreach ($services as $service) {
         // Simply store the service without foreign key checks
         AppointmentService::create([
-            'booking_id'   => $service['booking_id'], // No constraint on this field
+            'booking_id'   => $service['booking_id'], 
             'name'         => $service['name'],
             'description'  => $service['description'],
             'price'        => $service['price'],
@@ -102,7 +102,7 @@ public function updateStatus(Request $request, $id)
     
     if ($validated['status'] === 'completed') {
         $updateData['order_status'] = 'completed';
-        // Add any additional completion logic here
+       
     }
 
     $appointment->update($updateData);

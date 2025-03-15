@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
-    // **🔹 1. Register User**
+    //Register User
     public function register(StoreUserRequest $request)
     {
         $user = User::create([
@@ -32,7 +32,7 @@ class UsersController extends Controller
         ], 201);
     }
 
-    // **🔹 2. Login User**
+    // Login User
     public function login(AuthUserRequest $request)
     {
         $user = User::where('email', $request->email)
@@ -56,12 +56,12 @@ class UsersController extends Controller
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'role' => $user->role // Ensure this is included
+                'role' => $user->role 
             ]
         ], 200);
     }
 
-    // **🔹 3. Logout User** (Fixed)
+    // Logout User
     public function logout(Request $request)
     {
         try {
