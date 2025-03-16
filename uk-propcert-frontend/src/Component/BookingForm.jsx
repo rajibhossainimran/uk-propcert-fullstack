@@ -120,7 +120,7 @@ const userId = parseInt(localStorage.getItem("userId"));
                     index % 2 === 0 ? "bg-lime-50 hover:bg-white" : "bg-lime-100 hover:bg-white"
                   }`}
                 >
-                  {/* <td className="p-3">{service.id}</td> */}
+                  
                   <td className="p-3 font-semibold text-gray-700">
                     {service.name}
                   </td>
